@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Actions Analyzer</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #14243a;
+    color: white;
+    position: fixed;
+    padding: 25px 18px;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.logo span {
+    color: #53c6b7;
+}
+
+.nav-item {
+    padding: 14px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #cbd5e1;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    background: #263b55;
+    color: white;
+}
+
+.nav-item:hover {
+    background: #263b55;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 26px;
+}
+
+.header p {
+    color: #64748b;
+    margin-top: 6px;
+}
+
+.user {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid #e5eaf0;
+}
+
+.card-label {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.card-description {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 8px;
+}
+
+/* CONTENT GRID */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e5eaf0;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.panel-description {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.upload-box {
+    border: 2px dashed #cbd5e1;
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-box p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 8px 0;
+}
+
+input[type="file"] {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 140px;
+    resize: vertical;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+textarea:focus {
+    outline: 2px solid #53c6b7;
+    border-color: transparent;
+}
+
+.button {
+    display: inline-block;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #087f8c;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button:hover {
+    background: #066874;
+}
+
+.secondary-button {
+    background: #e8f4f5;
+    color: #087f8c;
+    margin-top: 10px;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-review {
+    background: #fff4db;
+    color: #a16207;
+}
+
+.status-complete {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-action {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* RESULTS */
+
+.result-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.result-text {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* TABLE */
+
+.table-panel {
+    margin-top: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5eaf0;
+    font-size: 13px;
+}
+
+th {
+    color: #64748b;
+    background: #f8fafc;
+    font-weight: bold;
+}
+
+td {
+    color: #334155;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 30px;
+}
+
+.api-status {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.api-status.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.api-status.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.api-status.loading {
+    display: block;
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.api-status strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        Corporate <span>Actions</span>
+    </div>
+
+    <div class="nav-item active">
+        Dashboard
+    </div>
+
+    <div class="nav-item">
+        New Analysis
+    </div>
+
+    <div class="nav-item">
+        All Events
+    </div>
+
+    <div class="nav-item">
+        Pending Review
+    </div>
+
+    <div class="nav-item">
+        Reports
+    </div>
+
+    <div class="nav-item">
+        Settings
+    </div>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+    <div class="header">
+
+        <div>
+            <h1>Corporate Actions Analyzer</h1>
+            <p>AI-powered corporate action analysis and operations workflow</p>
+        </div>
+
+        <div class="user">
+            Operations User
+        </div>
+
+    </div>
+
+    <!-- DASHBOARD CARDS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-label">Total Events</div>
+            <div class="card-value">128</div>
+            <div class="card-description">Sample dashboard data</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Pending Review</div>
+            <div class="card-value">14</div>
+            <div class="card-description">Awaiting validation</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Action Required</div>
+            <div class="card-value">8</div>
+            <div class="card-description">Deadlines approaching</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">Completed</div>
+            <div class="card-value">106</div>
+            <div class="card-description">Sample dashboard data</div>
+        </div>
+
+    </div>
+
+    <!-- MAIN GRID -->
+
+    <div class="content-grid">
+
+        <!-- ANALYSIS FORM -->
+
+        <div class="panel">
+
+            <h2>New Corporate Action Analysis</h2>
+
+            <p class="panel-description">
+                Upload an announcement or paste the information below.
+            </p>
+
+            <form
+                id="analysisForm"
+                //action="http://localhost:8000/api/analyses"
+                //method="POST"
+                //enctype="multipart/form-data"
+            >
+
+                <label>Corporate Action Documents</label>
+
+                <div class="upload-box">
+
+                    <strong>Upload announcement files</strong>
+
+                    <p>
+                        PDF, Excel, CSV or TXT files
+                    </p>
+
+                    <input
+                        type="file"
+                        name="files"
+                        accept=".pdf,.xlsx,.xls,.csv,.txt"
+                        multiple
+                    >
+
+                </div>
+
+                <label>Paste Announcement Text</label>
+
+                <textarea
+                    name="pasted_text"
+                    placeholder="Paste corporate action announcement details here..."
+                ></textarea>
+
+                <label>Portfolio Holdings File (Optional)</label>
+
+                <div class="upload-box">
+
+                    <strong>Upload portfolio / holdings</strong>
+
+                    <p>
+                        Excel or CSV file
+                    </p>
+
+                    <input
+                        type="file"
+                        name="holdings_file"
+                        accept=".xlsx,.xls,.csv"
+                    >
+
+                </div>
+
+                <button type="submit" class="button"  id="analyzeButton">
+                    Analyze Corporate Action
+                </button>
+
+            </form>
+
+            <div id="analysisStatus" class="api-status" aria-live="polite">
+                <h1>Analysis Status</h1>
+            </div>
+
+        </div>
+
+        <!-- ANALYSIS SUMMARY -->
+
+        <div>
+
+            <div class="panel">
+
+                <h2>Analysis Overview</h2>
+
+                <p class="panel-description">
+                    Example analysis output
+                </p>
+
+                <div class="result-item">
+
+                    <div class="result-title">
+                        Event Classification
+                    </div>
+
+                    <div class="result-text">
+                        Stock Split
+                    </div>
+
+                </div>
+
+                <div class="result-item">
+
+                    <div class="result-title">
+                        Company
+                    </div>
+
+                    <div class="result-text">
+                        ABC Corporation
+                    </div>
+
+                </div>
+
+                <div class="result-item">
+
+                    <div class="result-title">
+                        Security ID
+                    </div>
+
+                    <div class="result-text">
+                        US1234567890
+                    </div>
+
+                </div>
+
+                <div class="result-item">
+
+                    <div class="result-title">
+                        Record Date
+                    </div>
+
+                    <div class="result-text">
+                        December 10, 2026
+                    </div>
+
+                </div>
+
+                <div class="result-item">
+
+                    <div class="result-title">
+                        Election Deadline
+                    </div>
+
+                    <div class="result-text">
+                        Not applicable
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RISK FLAGS -->
+
+            <div class="panel">
+
+                <h2>Risk & Information Alerts</h2>
+
+                <div class="result-item">
+
+                    <span class="status status-review">
+                        Review Required
+                    </span>
+
+                    <p class="result-text" style="margin-top:10px">
+                        Verify security eligibility and holdings
+                        before processing.
+                    </p>
+
+                </div>
+
+                <div class="result-item">
+
+                    <span class="status status-action">
+                        Missing Information
+                    </span>
+
+                    <p class="result-text" style="margin-top:10px">
+                        Confirm whether an election deadline
+                        applies to the event.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AFFECTED HOLDINGS -->
+
+    <div class="panel table-panel">
+
+        <h2>Affected Portfolio Holdings</h2>
+
+        <p class="panel-description">
+            Sample data – actual holdings will be populated by the backend.
+        </p>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Account</th>
+                    <th>Security ID</th>
+                    <th>Company</th>
+                    <th>Quantity</th>
+                    <th>Event</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>10001</td>
+                    <td>US1234567890</td>
+                    <td>ABC Corporation</td>
+                    <td>150</td>
+                    <td>Stock Split</td>
+                    <td>
+                        <span class="status status-review">
+                            Pending Review
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>10002</td>
+                    <td>US1234567890</td>
+                    <td>ABC Corporation</td>
+                    <td>500</td>
+                    <td>Stock Split</td>
+                    <td>
+                        <span class="status status-review">
+                            Pending Review
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>10003</td>
+                    <td>US1234567890</td>
+                    <td>ABC Corporation</td>
+                    <td>200</td>
+                    <td>Stock Split</td>
+                    <td>
+                        <span class="status status-complete">
+                            Reviewed
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="footer">
+        Corporate Actions Analyzer | AI-assisted operations
+        | Human validation required
+    </div>
+
+</div>
+<script src="function.js"></script>
+</body>
+</html>
+
+
