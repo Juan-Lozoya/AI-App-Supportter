@@ -76,3 +76,11 @@ def save_analysis(analysis_id: str, prepared: list[PreparedFile]) -> list[dict]:
 
   logger.info("Analysis %s stored (%d files)", analysis_id, len(stored))
   return stored
+
+def read_object(key: str) -> bytes:
+  """Lee un archivo previamente subido (usado por el pipeline y por los reintentos)."""
+  try:
+    return _s3.get_object(Bucket=config.DOCS_BUCKET, Key=key)["Body"].read()
+  except (BotoCoreError, ClientError) as exc:
+    logger.exception("S3 read failed for %s", key)
+    raise StorageError("Could not read a stored file.") from exc
