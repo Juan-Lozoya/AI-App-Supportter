@@ -1,126 +1,117 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { createAnalysis } from "../api";
-import ApiStatus, { type ApiState } from "./ApiStatus";
+import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import type { FormEvent } from "react";
 
-const ALLOWED = [".pdf", ".xlsx", ".xls", ".csv", ".txt"];
+import { useCreateAnalysis } from "../api/hooks";
+import { ApiStatus } from "./ApiStatus";
 
-function hasAllowedExtension(file: File): boolean {
-  const name = file.name.toLowerCase();
-  return ALLOWED.some((ext) => name.endsWith(ext));
-}
+const inputFile =
+  "mt-2 w-full text-[13px] file:mr-3 file:rounded-md file:border-0 file:bg-brand-soft file:px-3 file:py-2 file:font-bold file:text-brand";
 
-export default function AnalysisForm() {
+export function AnalysisForm() {
+  const navigate = useNavigate();
+  const create = useCreateAnalysis();
   const [files, setFiles] = useState<File[]>([]);
   const [pastedText, setPastedText] = useState("");
   const [holdingsFile, setHoldingsFile] = useState<File | null>(null);
-  const [state, setState] = useState<ApiState>({ kind: "idle" });
+  const [formError, setFormError] = useState<string | null>(null);
 
-  const isLoading = state.kind === "loading";
-
-  const handleFiles = (e: ChangeEvent<HTMLInputElement>) =>
-    setFiles(Array.from(e.target.files ?? []));
-
-  const handleHoldings = (e: ChangeEvent<HTMLInputElement>) =>
-    setHoldingsFile(e.target.files?.[0] ?? null);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const text = pastedText.trim();
-    if (files.length === 0 && !text) {
-      setState({
-        kind: "error",
-        message: "Upload at least one file or paste announcement text.",
-      });
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    if (files.length === 0 && !pastedText.trim()) {
+      setFormError("Upload at least one document or paste announcement text.");
       return;
     }
-
-    const invalid = [...files, ...(holdingsFile ? [holdingsFile] : [])].find(
-      (f) => !hasAllowedExtension(f),
+    setFormError(null);
+    create.mutate(
+      { files, pastedText, holdingsFile },
+      {
+        onSuccess: (created) =>
+          navigate({
+            to: "/analyses/$analysisId",
+            params: { analysisId: created.analysis_id },
+          }),
+      },
     );
-    if (invalid) {
-      setState({
-        kind: "error",
-        message: `File format not supported: ${invalid.name}`,
-      });
-      return;
-    }
+  }
 
-    const formData = new FormData();
-    files.forEach((f) => formData.append("files", f));
-    if (text) formData.append("pasted_text", text);
-    if (holdingsFile) formData.append("holdings_file", holdingsFile);
-
-    setState({ kind: "loading" });
-    try {
-      const result = await createAnalysis(formData);
-
-      setState({
-        kind: "success",
-        analysisId: result.analysis_id,
-        files: result.files.map((f) => f.filename),
-        status: result.status,
-      });
-    } catch (err) {
-      setState({
-        kind: "error",
-        message:
-          err instanceof TypeError
-            ? "Could not reach the backend. Is it running on port 8000?"
-            : (err as Error).message,
-      });
-    }
-  };
+  const error = formError ?? create.error?.message;
 
   return (
-    <div className="panel">
-      <h2>New Corporate Action Analysis</h2>
-      <p className="panel-description">
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-xl border border-line bg-white p-6"
+    >
+      <h2 className="mb-2 text-lg font-bold">New Corporate Action Analysis</h2>
+      <p className="mb-5 text-[13px] text-muted">
         Upload an announcement or paste the information below.
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="files">Corporate Action Documents</label>
-        <div className="upload-box">
-          <strong>Upload announcement files</strong>
-          <p>PDF, Excel, CSV or TXT files</p>
+      <div className="mb-5 rounded-[10px] border-2 border-dashed border-slate-300 bg-slate-50 p-6">
+        <label className="block text-[13px] font-bold">
+          Announcement documents
+          <span className="mt-1 block font-normal text-muted">
+            PDF, Excel, CSV or TXT files
+          </span>
           <input
-            id="files"
             type="file"
-            accept={ALLOWED.join(",")}
             multiple
-            onChange={handleFiles}
+            accept=".pdf,.xlsx,.xls,.csv,.txt"
+            className={inputFile}
+            onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
           />
-        </div>
-
-        <label htmlFor="pasted_text">Paste Announcement Text</label>
-        <textarea
-          id="pasted_text"
-          value={pastedText}
-          onChange={(e) => setPastedText(e.target.value)}
-          placeholder="Paste corporate action announcement details here..."
-        />
-
-        <label htmlFor="holdings_file">
-          Portfolio Holdings File (Optional)
         </label>
-        <div className="upload-box">
-          <strong>Upload portfolio / holdings</strong>
-          <p>Excel or CSV file</p>
+        {files.length > 0 && (
+          <p className="mt-2 text-xs text-muted">
+            {files.map((f) => f.name).join(", ")}
+          </p>
+        )}
+      </div>
+
+      <label className="mb-5 block text-[13px] font-bold">
+        Or paste the announcement text
+        <textarea
+          rows={8}
+          value={pastedText}
+          placeholder="Paste corporate action announcement details here..."
+          onChange={(e) => setPastedText(e.target.value)}
+          className="mt-2 min-h-36 w-full resize-y rounded-lg border border-slate-300 p-3 text-sm font-normal focus:border-transparent focus:outline-2 focus:outline-accent"
+        />
+      </label>
+
+      <div className="mb-5 rounded-[10px] border-2 border-dashed border-slate-300 bg-slate-50 p-6">
+        <label className="block text-[13px] font-bold">
+          Portfolio holdings file (optional)
+          <span className="mt-1 block font-normal text-muted">
+            Excel or CSV file
+          </span>
           <input
-            id="holdings_file"
             type="file"
             accept=".xlsx,.xls,.csv"
-            onChange={handleHoldings}
+            className={inputFile}
+            onChange={(e) => setHoldingsFile(e.target.files?.[0] ?? null)}
           />
-        </div>
+        </label>
+      </div>
 
-        <button type="submit" className="button" disabled={isLoading}>
-          {isLoading ? "Uploading..." : "Analyze Corporate Action"}
-        </button>
-      </form>
+      <button
+        type="submit"
+        disabled={create.isPending}
+        className="w-full rounded-lg bg-brand p-3.5 text-[15px] font-bold text-white hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {create.isPending ? "Uploading…" : "Analyze corporate action"}
+      </button>
 
-      <ApiStatus state={state} />
-    </div>
+      {create.isPending && (
+        <ApiStatus state="loading" title="Uploading files">
+          The analysis starts as soon as the upload finishes.
+        </ApiStatus>
+      )}
+      {error && (
+        <ApiStatus state="error" title="Could not start the analysis">
+          {error}
+        </ApiStatus>
+      )}
+    </form>
   );
 }

@@ -1,6 +1,7 @@
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel as _BaseModel
+from pydantic import ConfigDict, Field
 
 EventType = Literal[
   "CASH_DIVIDEND", "STOCK_DIVIDEND", "STOCK_SPLIT", "REVERSE_STOCK_SPLIT", "MERGER",
@@ -28,6 +29,10 @@ EVENT_LABELS: dict[str, str] = {
   "UNKNOWN": "Unknown",
 }
 
+class BaseModel(_BaseModel):
+    # Marca como "requeridos" en el esquema OpenAPI los campos que siempre se devuelven
+    # (aunque tengan valor por defecto), para que los tipos de TypeScript sean exactos.
+    model_config = ConfigDict(json_schema_serialization_defaults_required=True)
 
 # ---------- Archivos ----------
 class UploadedFileInfo(BaseModel):

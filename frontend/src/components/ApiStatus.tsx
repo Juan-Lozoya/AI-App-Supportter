@@ -1,35 +1,39 @@
-export type ApiState =
-  | { kind: "idle" }
-  | { kind: "loading" }
-  | { kind: "success"; analysisId: string; files: string[]; status: string }
-  | { kind: "error"; message: string };
+import type { ReactNode } from "react";
 
-export default function ApiStatus({ state }: { state: ApiState }) {
-  if (state.kind === "idle") return null;
+type State = "loading" | "success" | "error";
 
+const styles: Record<State, string> = {
+  loading: "bg-sky-100 text-sky-800",
+  success: "bg-green-100 text-green-800",
+  error: "bg-red-100 text-red-800",
+};
+
+interface ApiStatusProps {
+  state: State;
+  title: string;
+  children?: ReactNode;
+}
+
+export function ApiStatus({ state, title, children }: ApiStatusProps) {
   return (
-    <div className={`api-status ${state.kind}`} aria-live="polite">
-      {state.kind === "loading" && <strong>Uploading documents...</strong>}
-
-      {state.kind === "error" && (
-        <>
-          <strong>Error</strong>
-          {state.message}
-        </>
-      )}
-
-      {state.kind === "success" && (
-        <>
-          <strong>Documents received</strong>
-          Analysis ID: {state.analysisId}
-          <br />
-          Status: {state.status}
-          <br />
-          Files: {state.files.join(", ")}
-          <br />
-          <em>AI analysis is not implemented yet.</em>
-        </>
-      )}
+    <div
+      role={state === "error" ? "alert" : "status"}
+      aria-live="polite"
+      className={`mt-4 rounded-lg p-4 text-sm leading-relaxed ${styles[state]}`}
+    >
+      <strong className="block">{title}</strong>
+      {children}
     </div>
   );
+}
+
+// Para secciones que cargan con su propia consulta.
+export function SectionState({ error }: { error: Error | null }) {
+  if (error)
+    return (
+      <p role="alert" className="text-sm text-red-700">
+        {error.message}
+      </p>
+    );
+  return <p className="text-sm text-muted">Loading…</p>;
 }

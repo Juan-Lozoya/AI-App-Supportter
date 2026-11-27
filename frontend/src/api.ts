@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 
 export interface CreateAnalysisResponse {
@@ -15,21 +17,25 @@ interface Files {
 export async function createAnalysis(
   formData: FormData,
 ): Promise<CreateAnalysisResponse> {
-  const response = await fetch(`${API_URL}/api/analyses`, {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    const { data } = await axios.post<CreateAnalysisResponse>(
+      `${API_URL}/api/analyses`,
+      formData,
+    );
 
-  if (!response.ok) {
-    let detail = `Request failed (${response.status})`;
-    try {
-      const body = await response.json();
-      if (typeof body.detail === "string") detail = body.detail;
-    } catch {
-      /* la respuesta no era JSON */
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const detail = error.response?.data?.detail;
+
+      throw new Error(
+        typeof detail === "string"
+          ? detail
+          : `Request failed (${error.response?.status ?? "Network Error"})`,
+        { cause: error },
+      );
     }
-    throw new Error(detail);
-  }
 
-  return response.json();
+    throw error;
+  }
 }

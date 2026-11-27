@@ -1,24 +1,56 @@
-const SAMPLE_FIELDS = [
-  { title: "Event Classification", value: "Stock Split" },
-  { title: "Company", value: "ABC Corporation" },
-  { title: "Security ID", value: "US1234567890" },
-  { title: "Record Date", value: "December 10, 2026" },
-  { title: "Election Deadline", value: "Not applicable" },
-];
+import type { OverviewResponse } from "../api/types";
+import { formatDate, humanize } from "../lib/format";
+import { Panel, ResultItem } from "./Panel";
 
-export default function AnalysisOverview() {
+export function AnalysisOverview({ overview }: { overview: OverviewResponse }) {
+  const event = overview.event;
+
+  const rows: [string, string][] = [
+    [
+      "Event classification",
+      overview.event_label ?? humanize(event?.event_type),
+    ],
+    ["Company", event?.company_name ?? "—"],
+    ["Security ID", event?.isin ?? event?.cusip ?? event?.ticker ?? "—"],
+    ["Record date", formatDate(event?.record_date)],
+    [
+      "Election deadline",
+      overview.election_display ?? formatDate(event?.election_deadline),
+    ],
+  ];
+
   return (
-    <div className="panel">
-      <h2>Analysis Overview</h2>
-      <p className="panel-description">
-        Sample data – not a real analysis result
-      </p>
-      {SAMPLE_FIELDS.map((field) => (
-        <div className="result-item" key={field.title}>
-          <div className="result-title">{field.title}</div>
-          <div className="result-text">{field.value}</div>
-        </div>
+    <Panel
+      title="Analysis Overview"
+      description="Extracted from the announcement"
+    >
+      {rows.map(([title, value]) => (
+        <ResultItem key={title} title={title}>
+          {value}
+        </ResultItem>
       ))}
-    </div>
+
+      {overview.summary && (
+        <ResultItem title="Summary">{overview.summary}</ResultItem>
+      )}
+      {overview.required_actions.length > 0 && (
+        <ResultItem title="Required actions">
+          <ul className="list-disc pl-5">
+            {overview.required_actions.map((text) => (
+              <li key={text}>{text}</li>
+            ))}
+          </ul>
+        </ResultItem>
+      )}
+      {overview.next_steps.length > 0 && (
+        <ResultItem title="Next steps">
+          <ul className="list-disc pl-5">
+            {overview.next_steps.map((text) => (
+              <li key={text}>{text}</li>
+            ))}
+          </ul>
+        </ResultItem>
+      )}
+    </Panel>
   );
 }
