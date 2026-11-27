@@ -1,0 +1,36 @@
+1. ¿Por qué utilizar Claude Sonnet 4.6?
+Pregunta: ¿Por qué eligieron Claude Sonnet 4.6 y no otro modelo?
+Respuesta para entrevista:
+Elegimos Claude Sonnet 4.6 porque nuestro caso de uso requiere que el modelo analice documentos financieros, interprete información estructurada y genere conclusiones a partir de múltiples fuentes de información.
+
+Buscábamos un equilibrio entre capacidad de razonamiento, precisión, latencia y costo. No necesariamente necesitábamos utilizar el modelo más costoso para todas las tareas, sino uno que pudiera realizar análisis complejos manteniendo costos razonables.
+
+Además, al utilizar Amazon Bedrock, podemos consumir el modelo a través de la infraestructura de AWS, centralizando la integración, permisos y administración de acceso.
+
+¿Por qué no utilizar GPT, Gemini u otro modelo?
+No significa que Claude sea universalmente mejor. La elección depende de nuestros requerimientos y de los resultados de las evaluaciones.
+
+Evaluaríamos diferentes modelos utilizando un conjunto de documentos reales y métricas como:
+- Precisión de los datos extraídos.
+- Calidad de las conclusiones.
+- Consistencia de las respuestas.
+- Latencia.
+- Costo por análisis.
+- Capacidad de seguir instrucciones y producir respuestas estructuradas.
+Si otro modelo ofrece mejores resultados para una tarea específica, nuestra arquitectura permite evaluar cambiarlo sin necesariamente modificar todo el sistema.
+
+¿Por qué usar Bedrock en lugar de consumir directamente la API de Anthropic?
+Amazon Bedrock nos permite acceder a modelos de diferentes proveedores a través de un servicio administrado por AWS. Esto facilita integrarlo con nuestro ecosistema de AWS, utilizar IAM para permisos y evitar administrar directamente la infraestructura de los modelos.
+
+También nos permite explorar diferentes modelos dentro de una arquitectura similar y centralizar parte de la gestión de acceso.
+
+Trade-off: Bedrock añade una capa de abstracción y puede tener diferencias de disponibilidad, costos, límites y configuración frente a consumir directamente una API de proveedor.
+
+3. ¿Por qué DynamoDB en lugar de PostgreSQL?
+Esta es una de las preguntas más importantes, porque muchas veces se elige DynamoDB simplemente porque es NoSQL, sin tener una justificación real.
+Pregunta: ¿Por qué usar DynamoDB si PostgreSQL ya puede almacenar los datos?
+DynamoDB es una base de datos NoSQL administrada que está diseñada para ofrecer operaciones de baja latencia y escalar de forma muy eficiente cuando los patrones de acceso a los datos están bien definidos.
+
+PostgreSQL, por otro lado, ofrece relaciones, consultas complejas, joins, restricciones y transacciones SQL, lo cual resulta especialmente útil cuando los datos tienen una estructura relacional.
+
+La decisión depende de cómo consultamos nuestros datos, no simplemente del volumen de información.
