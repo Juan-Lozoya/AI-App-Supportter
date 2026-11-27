@@ -8,6 +8,11 @@ services:
     env_file: .env
     volumes:
       - ./backend/app:/app/app
+      - ${HOME}/.aws:/root/.aws:ro
+      - ${HOME}/.aws/login/cache:/root/.aws/login/cache
+    environment:
+      AWS_PROFILE: default
+      AWS_REGION: us-east-2
 
   frontend:
     build:
