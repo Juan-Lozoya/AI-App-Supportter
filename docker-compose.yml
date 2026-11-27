@@ -3,13 +3,11 @@ services:
     build:
       context: ./backend
       target: dev
+      dockerfile: Dockerfile
     ports: ["8000:8000"]
     env_file: .env
-    environment:
-      AWS_PROFILE: ${AWS_PROFILE:-default}
     volumes:
       - ./backend/app:/app/app
-      - ${AWS_CREDENTIALS_DIR}:/root/.aws:ro
 
   frontend:
     build:
