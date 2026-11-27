@@ -1,0 +1,78 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - RENOUNCEABLE RIGHTS OFFERING (RHTS / EXRI)
+================================================================================
+Document ID:        DOC-2026-CA-005
+Event Type:         Renounceable Rights Offering (Voluntary with Tradable Rights)
+ISO 15022 Codes:    RHDI (Rights Distribution) / EXRI (Exercise of Rights)
+Issuer Name:        Solstice Renewables AG (Frankfurt, Germany)
+Parent Security:    Solstice Renewables AG Bearer Ordinary Shares
+Parent ISIN:        DE000SLR8804
+Parent Ticker:      SLR (XETRA)
+Rights Security:    Solstice Renewables AG Subscription Rights (Bezugsrechte)
+Rights ISIN:        DE000SLR8812
+Rights Ticker:      SLRB (XETRA)
+Rights Ratio:       1 Subscription Right per 1 Existing Share held on Record Date
+Exercise Ratio:     3 Subscription Rights required to subscribe for 1 New Share (3:1)
+Subscription Price: EUR 24.00 per New Share
+Announcement Date:  2026-09-01
+Record Date:        2026-09-10 (Close of XETRA trading)
+Rights Distribution:2026-09-11
+Rights Trading:     2026-09-11 to 2026-09-22 (12:00 CEST on XETRA)
+Market Sub Cutoff:  2026-09-24 at 16:00 CEST (Clearstream Banking Frankfurt)
+Internal Cutoff:    2026-09-22 at 15:00 CEST (Mandatory Client Instruction Deadline)
+New Shares Delivery:2026-09-30
+Status:             ACTIVE / ELECTION REQUIRED
+================================================================================
+
+1. SUMMARY OF THE RIGHTS OFFERING
+Solstice Renewables AG ("Solstice" or the "Company") is conducting a capital increase via a **Renounceable Rights Offering** to raise approximately EUR 360 million in gross proceeds for grid-scale battery storage expansion.
+
+Shareholders holding Solstice Renewables AG Ordinary Shares (ISIN: DE000SLR8804) at close of business on the Record Date (September 10, 2026) will receive **1 transferable Subscription Right (ISIN: DE000SLR8812) for every 1 existing Ordinary Share held**. Holders may exercise **3 Subscription Rights plus payment of EUR 24.00 in cash to subscribe for 1 New Ordinary Share** (to be issued initially under interim ISIN DE000SLR8820 until dividend equalization, then assimilated into DE000SLR8804).
+
+Because the rights are **renounceable (tradable)** on the Frankfurt Stock Exchange (XETRA) under ticker `SLRB`, shareholders may either exercise their rights, sell them in the open market during the Rights Trading Period, purchase additional rights to round up their subscription, or allow them to lapse.
+
+2. TIMELINE AND CRITICAL OPERATIONAL DEADLINES
+All times are Central European Summer Time (CEST / UTC+2).
+
+| Milestone | Date | Time (CEST) | Operational Requirement |
+| :--- | :--- | :--- | :--- |
+| Prospectus Publication & Launch | 2026-09-01 | 08:00 | BaFin approval published; initial MT564 RHDI/EXRI generated. |
+| Ex-Rights Date | 2026-09-09 | 09:00 | Parent shares (DE000SLR8804) commence trading ex-rights on XETRA. |
+| Record Date | 2026-09-10 | 17:30 | Clearstream snapshot determines entitlement to Subscription Rights. |
+| Rights Credit & Trading Start | 2026-09-11 | 09:00 | DE000SLR8812 credited to client accounts; XETRA trading opens. |
+| Rights Trading End Date | 2026-09-22 | 12:00 | Last day/time to buy or sell Subscription Rights on XETRA. |
+| Internal Bank Election Cutoff | 2026-09-22 | 15:00 | Hard deadline for clients to submit Exercise, Sell, or Oversubscription instructions. |
+| Clearstream Market Deadline | 2026-09-24 | 16:00 | Depository cutoff for submitting subscription instructions and EUR funding. |
+| New Shares Settlement Date | 2026-09-30 | 10:00 | Delivery of subscribed new shares against EUR 24.00 cash debit. |
+
+3. ELIGIBILITY AND JURISDICTIONAL RESTRICTIONS
+- **Eligible Jurisdictions:** Open to institutional and retail shareholders resident in the European Economic Area (EEA), the United Kingdom, and Switzerland.
+- **Restricted Jurisdictions (US / Canada / Australia / Japan):** Due to securities registration exemptions under the US Securities Act of 1933 (Rule 144A / Regulation S), **US Persons** are prohibited from exercising Subscription Rights unless they execute a Qualified Institutional Buyer (QIB) Investor Representation Letter prior to September 18, 2026. Uncertified US accounts will have their Subscription Rights automatically sold in the open market by the custodian on September 21, 2026, with net cash proceeds remitted to the client.
+
+4. AVAILABLE SHAREHOLDER OPTIONS
+Clients holding Subscription Rights (`DE000SLR8812`) must elect one of the following options before **September 22, 2026 at 15:00 CEST**:
+
+- **Option 1: EXERCISE RIGHTS (Basic Subscription - ACTN: EXER)**
+  Submit multiples of 3 Subscription Rights together with EUR 24.00 per new share subscribed. Example: Exercising 300 rights requires EUR 2,400.00 and yields 100 New Shares. Rights submitted not divisible by 3 will be rounded down to the nearest multiple of 3, and excess rights (1 or 2 rights) will expire worthless unless separately sold before 12:00 CEST on September 22.
+- **Option 2: EXERCISE RIGHTS + OVERSUBSCRIPTION PRIVILEGE (ACTN: EXER + OVER)**
+  Shareholders who exercise 100% of their basic Subscription Rights may apply for additional New Shares at EUR 24.00 per share from the unexercised rump pool. Oversubscription allocations are subject to pro-rata scale-back based on basic rights exercised and are not guaranteed. Full EUR funding for the maximum requested oversubscription must be available in the client's EUR cash account by September 22, 2026 at 15:00 CEST.
+- **Option 3: SELL RIGHTS IN THE OPEN MARKET (ACTN: SELL)**
+  Instruct the execution desk (prior to 10:30 CEST on September 22, 2026) to sell all or part of the Subscription Rights (`DE000SLR8812`) on XETRA before trading closes at 12:00 CEST.
+- **Option 4: LAPSE / DO NOTHING (DEFAULT - ACTN: LAPS)**
+  If no valid instruction is received by the internal bank deadline (September 22, 2026 at 15:00 CEST), **unexercised rights will expire worthless (`value = EUR 0.00`)** after September 24, 2026. Neither the Issuer nor the bank conducts automatic "lapsation sales" for eligible non-US accounts.
+
+5. OPERATIONAL PROCESSING AND FUNDING CONTROLS
+1. **Rights Distribution Booking (2026-09-11):** Credit 1 unit of `DE000SLR8812` for every 1 settled share of `DE000SLR8804` held on September 10, 2026.
+2. **Cash Availability Verification:** Upon receiving an Exercise instruction (`MT565`), the analyst must verify that the client's EUR cash account holds cleared funds equal to `(Subscribed_New_Shares * EUR 24.00)`. Place an immediate cash reservation hold (`HOLD-RHTS-SLR`) on the required EUR balance.
+3. **Instruction Rejection Criteria:** Reject any election where:
+   - The client holds insufficient rights (`DE000SLR8812`) in settled status;
+   - Cleared EUR funds are insufficient to cover the full subscription cost (including oversubscription requests); or
+   - The account is flagged as a restricted US Person without an approved QIB legal sign-off.
+4. **Clearstream Submission & Settlement:** Transmit aggregated validated instructions via SWIFT MT565 to Clearstream Banking Frankfurt no later than September 23, 2026 at 14:00 CEST (26 hours prior to market deadline). On September 30, 2026, release the EUR cash hold, debit the subscription amount, credit the New Shares, and refund any unallocated oversubscription cash within 24 hours.
+
+6. OPERATIONAL RISKS AND DEADLINE WARNINGS
+- **Irreversible Value Loss on Lapsed Rights:** Because Solstice Subscription Rights trade with intrinsic value (e.g., if SLR trades at EUR 30.00 and the subscription price is EUR 24.00, each right has a theoretical value of `(30.00 - 24.00) / 3 = EUR 2.00`), failing to act before September 22 results in a total loss of the right's economic value. Operations must send mandatory reminder alerts at T-5 days and T-2 days before the internal cutoff to all accounts with uninstructed balances exceeding 500 rights.
+- **Trading vs. Exercise Cutoff Discrepancy:** Note carefully that XETRA trading of rights ends at **12:00 CEST on September 22**, whereas the internal bank exercise cutoff is **15:00 CEST on September 22**. Clients requesting a market sale after 10:30 CEST on September 22 cannot be guaranteed execution and must be advised immediately to either exercise or take direct broker execution.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-005
+================================================================================

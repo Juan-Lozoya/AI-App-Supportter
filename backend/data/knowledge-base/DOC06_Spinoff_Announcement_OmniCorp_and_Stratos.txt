@@ -1,0 +1,78 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - MANDATORY CORPORATE SPIN-OFF (SOFF)
+================================================================================
+Document ID:        DOC-2026-CA-006
+Event Type:         Corporate Spin-Off / Demerger (Mandatory)
+ISO 15022 Code:     SOFF
+Parent Company:     OmniCorp Industrial Group Inc.
+Parent Security:    OmniCorp Industrial Group Inc. Common Stock
+Parent ISIN:        US68215P1049
+Parent CUSIP:       68215P104
+Parent Ticker:      OMNI (NYSE)
+Spun-Off Company:   Stratos Aerospace & Defense Systems Inc.
+New Security:       Stratos Aerospace & Defense Systems Inc. Common Stock
+New ISIN:           US86319T1016
+New CUSIP:          86319T101
+New Ticker:         STRD (NYSE)
+Distribution Ratio: 1 share of Stratos (STRD) for every 4 shares of OmniCorp (OMNI) held (0.25 ratio)
+Announcement Date:  2026-07-22
+Record Date:        2026-10-14 (Close of business, 17:00 EDT)
+When-Issued Start:  2026-10-12
+Distribution Date:  2026-10-26 (After market close)
+Ex-Distribution Date:2026-10-27 (Regular-way trading begins)
+Status:             CONFIRMED / MANDATORY
+================================================================================
+
+1. OVERVIEW OF THE SPIN-OFF TRANSACTION
+OmniCorp Industrial Group Inc. ("OmniCorp") has announced the complete separation of its aerospace and defense division into an independent, publicly traded company named **Stratos Aerospace & Defense Systems Inc.** ("Stratos").
+
+The separation will be executed via a pro-rata tax-free distribution (spin-off) of 100% of the outstanding shares of Stratos Common Stock (ISIN: US86319T1016) to holders of OmniCorp Common Stock (ISIN: US68215P1049). Each OmniCorp shareholder of record at 17:00 EDT on October 14, 2026, will receive **1 share of Stratos Common Stock for every 4 shares of OmniCorp Common Stock held** (equivalent to 0.25 shares of Stratos per 1 share of OmniCorp).
+
+Shareholders are not required to pay any consideration, surrender or exchange their existing OmniCorp shares, or submit any election form to receive Stratos shares.
+
+2. KEY DATES AND DUAL-MARKET TRADING MECHANICS (REGULAR-WAY VS. EX-DISTRIBUTION)
+Because this spin-off involves a substantial portion of OmniCorp's enterprise value (>20%), the New York Stock Exchange (NYSE) will establish parallel trading markets between October 12, 2026 and October 26, 2026:
+
+| Date | Milestone / Market Convention | Operational Significance |
+| :--- | :--- | :--- |
+| 2026-07-22 | Board Approval & Form 10 Registration | SEC declares Form 10 effective; corporate action announced. |
+| 2026-10-12 | "When-Issued" & "Ex-Distribution" Trading | Three tickers trade concurrently on NYSE: `OMNI` (Regular-Way with due-bills), `OMNI WI` (Ex-Distribution without Stratos), and `STRD WI` (Stratos When-Issued). |
+| 2026-10-14 | Record Date (17:00 EDT) | Official shareholder registry snapshot at DTC. |
+| 2026-10-26 | Distribution Date (20:00 EDT) | OmniCorp distributes Stratos shares to DTC after market close; When-Issued trading ends. |
+| 2026-10-27 | Ex-Distribution Date (09:30 EDT) | `OMNI` trades ex-distribution; `STRD` commences regular-way trading; Due-Bills redeem. |
+| 2026-11-03 | Fractional Cash-in-Lieu Payment Date | Estimated distribution of Cash-in-Lieu (CIL) proceeds for fractional Stratos shares. |
+
+3. ELIGIBILITY, DUE-BILL RULES, AND FRACTIONAL SHARE TREATMENT
+3.1 Eligibility and Due-Bills
+- Shareholders who hold OmniCorp Common Stock (`OMNI`) on the Record Date (October 14, 2026) and continue to hold those shares through the Distribution Date (October 26, 2026) will receive the Stratos distribution directly.
+- **Due-Bill Period (October 12 – October 26, 2026):** Anyone selling `OMNI` in the "Regular-Way" market between October 12 and October 26 sells their right to receive the Stratos shares along with the OmniCorp shares; their account will carry a Due-Bill obligation to deliver 0.25 shares of `STRD` per share sold upon distribution. Conversely, clients selling under ticker `OMNI WI` (Ex-Distribution) retain their entitlement to the Stratos spin-off shares.
+
+3.2 Fractional Share Treatment
+No fractional shares of Stratos Common Stock will be distributed. Computershare Trust Company (the Distribution Agent) will aggregate all fractional share entitlements, sell them in the open market on October 27–28, 2026, and distribute the net cash proceeds (Cash-in-Lieu) pro-rata to eligible holders on or about November 3, 2026.
+
+3.3 Entitlement Examples
+- Holding **400 shares** of OMNI -> Receives **100 whole shares** of STRD + **0.0 fractional** (USD 0.00 CIL).
+- Holding **403 shares** of OMNI -> Receives **100 whole shares** of STRD + **0.75 fractional** paid in Cash-in-Lieu.
+- Holding **2 shares** of OMNI -> Receives **0 whole shares** of STRD + **0.50 fractional** paid in Cash-in-Lieu.
+
+4. IMPACT ON SHAREHOLDER HOLDINGS AND TAX BASIS ALLOCATION
+- **Retention of Parent Shares:** Shareholders retain 100% of their pre-spin-off OmniCorp (`OMNI`) share quantity. However, on October 27, 2026, the market price of `OMNI` will adjust downward to reflect the separation of Stratos.
+- **Tax Status and Cost Basis Split:** The spin-off is intended to qualify as a tax-free distribution under **Internal Revenue Code (IRC) Section 355** (except with respect to cash received in lieu of fractional shares, which is taxable as capital gain/loss).
+- **IRS Form 8937 Allocation:** Shareholders must allocate their pre-distribution aggregate tax cost basis between OmniCorp (`OMNI`) and Stratos (`STRD`) in proportion to their relative fair market values on October 27, 2026. OmniCorp will publish IRS Form 8937 within 45 days of the Distribution Date providing the exact percentage split (estimated at approximately 72.0% to OMNI and 28.0% to STRD).
+
+5. OPERATIONAL PROCESSING PROCEDURES
+1. **Security Master Configuration (By 2026-10-08):** Establish Stratos Aerospace & Defense Systems Inc. (`US86319T1016`, ticker `STRD`) in the Security Master. Configure temporary When-Issued identifiers (`OMNI.WI` and `STRD.WI`) for institutional trading desk routing.
+2. **Due-Bill Monitoring (2026-10-12 to 2026-10-27):** Corporate Actions and Settlements analysts must run the daily DTC Due-Bill Reconciliation Report to verify that clients who sold regular-way `OMNI` after October 14 have their expected `STRD` distribution flagged for automatic Due-Bill delivery on October 27 rather than erroneous client retention.
+3. **Distribution Posting (2026-10-27 Morning Batch):**
+   - Reconcile total whole `STRD` shares received from DTC via SWIFT MT566 against internal eligible balances (`FLOOR(Eligible_OMNI_Qty / 4)`).
+   - Post whole shares of `US86319T1016` to client custody accounts under transaction code `SOFF-DIST-STK`.
+   - Record fractional remainders (`0.25`, `0.50`, or `0.75`) in suspense queue `SUSP-CIL-STRD` until cash settlement on November 3, 2026.
+4. **Tax Lot Adjustment:** Flag all `OMNI` and newly created `STRD` tax lots with status `PENDING_8937_BASIS_SPLIT` until the Issuer publishes final fair market value ratios.
+
+6. OPERATIONAL RISKS AND EXCEPTIONS
+- **Misrouted "When-Issued" vs. "Regular-Way" Trades:** If an investment manager executes a trade intended to be Ex-Distribution (`OMNI WI`) but books it under Regular-Way (`OMNI`), the client will inadvertently transfer their Stratos spin-off entitlement to the buyer. Trade Support must enforce strict ticker validation checks between October 12 and October 26.
+- **Restricted Defense Sector Mandate Breaches:** Because Stratos (`STRD`) is a pure-play aerospace and defense manufacturer, institutional client accounts with strict ESG / Defense Exclusion mandates will automatically trigger compliance breach alerts upon receiving `STRD` shares on October 27. Corporate Actions must generate a pre-distribution impact report on October 16 so Portfolio Compliance can arrange orderly post-distribution liquidation windows.
+- **Short Position Liability:** Any account short `OMNI` on October 26 becomes automatically short `0.25` shares of `STRD` per shorted `OMNI` share on October 27. Stock Loan must confirm locate availability for `STRD` prior to the Distribution Date to avoid Regulation SHO close-out violations.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-006
+================================================================================

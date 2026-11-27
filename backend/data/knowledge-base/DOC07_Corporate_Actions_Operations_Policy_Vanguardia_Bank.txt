@@ -1,0 +1,82 @@
+================================================================================
+INTERNAL BANKING POLICY & STANDARD OPERATING PROCEDURE (SOP)
+================================================================================
+Document ID:        DOC-2026-POL-007
+Policy Title:       Global Corporate Actions Processing & Risk Control Policy
+Issuing Entity:     Vanguardia Global Custody & Investment Bank N.A.
+Policy Owner:       Global Head of Asset Servicing & Securities Operations
+Effective Date:     2026-01-15 (Annual Review Version 4.2)
+Classification:     INTERNAL OPERATIONS MANDATORY STANDARD
+Applies To:         All Asset Servicing, Custody Operations, Settlements, Tax, and Client Service Teams (Americas, EMEA, APAC)
+================================================================================
+
+1. PURPOSE AND SCOPE
+This policy establishes the mandatory operational standards, risk controls, authorization thresholds, and governance framework for processing corporate actions across all global equity, fixed income, and depositary receipt assets held in custody by Vanguardia Global Custody & Investment Bank N.A. ("Vanguardia" or the "Bank"). Adherence to this policy is mandatory for all operations personnel to prevent financial loss, regulatory breaches, and reputational damage arising from missed deadlines, inaccurate entitlement calculations, or unauthorized instructions.
+
+2. CORPORATE ACTION CLASSIFICATION FRAMEWORK
+All corporate action events must be categorized upon initial capture according to ISO 15022 / ISO 20022 event taxonomy and participation requirements:
+- **Mandatory Events (MAND):** Events mandated by the issuer or court order that affect all shareholders automatically without requiring shareholder election (e.g., Cash Dividends `DVCA`, Forward/Reverse Stock Splits `SPLF`/`SPLR`, Mandatory Mergers `MRGR`, Spin-Offs `SOFF`, Redemptions `REDM`).
+- **Mandatory with Options (CHOS):** Events that occur automatically, but allow shareholders to select among alternative forms of proceeds (e.g., Dividend Reinvestment `DVOP`, Merger with Cash/Stock Election `MRGR` with election). Failure to respond results in the issuer's default option being applied.
+- **Voluntary Events (VOLU):** Events requiring an affirmative, binding instruction from the beneficial owner or authorized investment manager in order to participate (e.g., Tender Offers `TEND`, Rights Exercises `EXRI`, Dutch Auctions `DTCH`, Consent Solicitations `CONS`). Failure to respond by the Bank's internal deadline results in non-participation (`NOAC` / Lapse).
+
+3. ROLES AND RESPONSIBILITIES
+- **Announcement Scrubbing & Data Integrity Team (ASDI):** Responsible for capturing, validating, and creating "Golden Copy" event records from primary sub-custodians (SWIFT MT564) and secondary vendor feeds within 4 hours of receipt.
+- **Corporate Actions Entitlements & Elections Analysts:** Responsible for reconciling record date positions, distributing client notifications, validating incoming client elections (`MT565`), enforcing internal cutoffs, and submitting depository instructions.
+- **Corporate Actions Supervisors / Team Leads (VP Level):** Responsible for performing mandatory Four-Eyes approvals, reviewing exception queues, and authorizing manual overrides or late-election escalations.
+- **Tax Operations & Market Claims Desk:** Responsible for applying withholding tax rates based on validated tax forms (W-8/W-9/treaty certificates) and issuing/monitoring market claims on unsettled trades and securities loans.
+
+4. ANNOUNCEMENT AND SECURITY IDENTIFIER VALIDATION ("GOLDEN COPY" RULE)
+4.1 Golden Copy Creation
+No corporate action may be released to clients until a validated "Golden Copy" record is established by matching at least **two independent sources**:
+1. Primary Source: Direct SWIFT MT564 message from the local sub-custodian or Central Securities Depository (CSD); AND
+2. Secondary Source: Certified market data feed (Bloomberg, ICE, or SIX Financial Information).
+
+4.2 Security Identifier Validation
+Before locking an event record, the analyst must verify exact alignment across **ISIN, CUSIP/SEDOL, Security Description, and Place of Safekeeping (PSET)**.
+- If an announcement references an unrecognized ISIN or an ISIN mapped to an inactive security shell, the event must be placed in `HOLD-SEC-MISMATCH` status and escalated to the Reference Data Management team within 2 hours.
+- If a primary and secondary source show conflicting dates (e.g., differing Ex-Dates or Record Dates) or differing rates, the event must be flagged `DISCREPANCY-PENDING` and verified directly with the sub-custodian via SWIFT MT599 inquiry before client notification.
+
+5. DEADLINE MANAGEMENT AND INTERNAL CUT-OFF BUFFERS
+To protect the Bank against operational latency, depository transmission queues, and manual validation errors, Vanguardia enforces mandatory **Internal Client Cut-Off Buffers** ahead of official market/depository deadlines:
+- **Standard Voluntary Events (Tender Offers, Rights Exercises, Odd-Lot Offers):** Internal deadline must be set at least **48 business hours (2 full business days)** prior to the CSD/Depository expiration deadline.
+- **Complex / Cross-Border Events Requiring Physical Documentation or FX Funding:** Internal deadline must be set at least **72 business hours (3 full business days)** prior to the CSD deadline.
+- **Same-Day / Short-Fuse Events (<72 hours total market window):** Internal deadline must be set at least **4 business hours** prior to the CSD deadline, with mandatory telephone/email escalation to all affected portfolio managers.
+
+6. ACCOUNT ELIGIBILITY CHECKS AND CLIENT NOTIFICATION
+6.1 Eligibility Verification
+Prior to generating client advices, the system and analyst must validate:
+- Settled vs. Traded balance status (filtering out pending trades that will not settle by Record Date unless covered by a Notice of Guaranteed Delivery);
+- Pledged, blocked, or collateralized share restrictions (requiring Prime Brokerage / Margin Desk release prior to voluntary election);
+- Jurisdictional restrictions (e.g., blocking US retail/non-QIB accounts from participating in Reg S / offshore rights offerings).
+
+6.2 Client Notification SLAs
+- **Mandatory Events:** Client advices (`MT564`) must be dispatched within **24 hours** of Golden Copy creation.
+- **Voluntary & Mandatory-with-Options Events:** Client advices must be dispatched within **4 business hours** of Golden Copy creation.
+- **Reminder Alerts:** Automated reminder notifications must be sent at **T-5 business days** and **T-1 business day** prior to the internal bank cut-off for all accounts that have not yet submitted an instruction.
+
+7. ELECTION PROCESSING AND THE FOUR-EYES APPROVAL PRINCIPLE
+7.1 Instruction Validation
+All client elections must be received in authenticated electronic format (SWIFT MT565, FIX, or Bank Client Portal). Verbal or unauthenticated email instructions are strictly prohibited.
+
+7.2 Mandatory Four-Eyes Principle
+Vanguardia enforces a strict **Maker-Checker (Four-Eyes) Control** across all high-risk corporate action workflows. No single individual may both input/validate and approve/release:
+1. Any outgoing depository election instruction (`MT565` / DTC ATOP / Clearstream instruction), regardless of monetary value;
+2. Any Golden Copy creation or material amendment to key dates, rates, or ratios;
+3. Any manual cash or stock entitlement posting, reversal, or adjustment;
+4. Any tax rate override or manual market claim write-off exceeding **USD 1,000.00**.
+
+8. ESCALATION PROCEDURES, RECORD KEEPING, AND AUDIT TRAIL
+8.1 Mandatory Escalation Triggers
+Analysts must immediately escalate to the Corporate Actions Vice President and Operational Risk Officer upon encountering:
+- A client election received after the internal bank cut-off (Late Election Request — accepted strictly on a "best-efforts" basis subject to client hold-harmless indemnity and VP sign-off);
+- Potential financial exposure or market claim loss exceeding **USD 25,000.00**;
+- An unannounced event discovered on or after Record Date / Ex-Date ("Late Announcement");
+- System outage affecting SWIFT connectivity within 4 hours of a market deadline.
+
+8.2 Record Keeping and Audit Trail Requirements
+In compliance with SEC Rule 17a-4, MiFID II, and internal banking audit standards:
+- All incoming and outgoing SWIFT messages (`MT564`, `MT565`, `MT566`, `MT567`, `MT568`), vendor feeds, client instructions, Maker-Checker approval timestamps, and exception resolution logs must be retained in immutable WORM (Write-Once-Read-Many) storage for a minimum of **7 years**.
+- Every manual override must contain a mandatory structured reason code and free-text justification identifying the root cause and approving supervisor.
+================================================================================
+END OF DOCUMENT DOC-2026-POL-007
+================================================================================

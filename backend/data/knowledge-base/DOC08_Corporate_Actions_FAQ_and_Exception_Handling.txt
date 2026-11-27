@@ -1,0 +1,129 @@
+================================================================================
+OPERATIONAL RUNBOOK: CORPORATE ACTIONS FAQ & EXCEPTION HANDLING GUIDE
+================================================================================
+Document ID:        DOC-2026-RUN-008
+Document Type:      Operational FAQ & Standard Exception Resolution Runbook
+Issuing Entity:     Vanguardia Global Custody & Investment Bank N.A.
+Version:            3.8 (Updated October 2026)
+Audience:           Corporate Actions Analysts, Senior Specialists, Exception Desk
+================================================================================
+
+SECTION A: FREQUENTLY ASKED QUESTIONS (CORE CONCEPTS)
+
+Q1: What is the operational difference between the Record Date and the Ex-Dividend Date (Ex-Date)?
+A1: The **Record Date** is the exact date established by the issuer on which a shareholder must be officially registered on the books of the company (or central depository) as a settled holder to receive a corporate action entitlement. The **Ex-Dividend Date (Ex-Date)** is set by the stock exchange (typically 1 business day prior to the Record Date under T+1 settlement cycles for standard cash dividends) and marks the first day on which a buyer of the security is NOT entitled to the upcoming distribution. If a client buys shares on or after the Ex-Date, the seller retains the dividend; if a client buys shares before the Ex-Date (Cum-Date) but the trade fails to settle by the Record Date, the buyer is still entitled to the dividend via an automated depository market claim.
+
+Q2: Why does Vanguardia enforce an internal election deadline that is 2 to 3 business days earlier than the depository market deadline?
+A2: Under Global Corporate Actions Policy DOC-2026-POL-007 (Section 5), the internal buffer protects against instruction validation errors, cash funding checks, Maker-Checker (Four-Eyes) approvals, cross-border time zone differences, and depository ATOP/SWIFT submission queues. Accepting instructions up to the exact market minute creates unacceptable risk of missed cutoffs and financial liability.
+
+--------------------------------------------------------------------------------
+SECTION B: EXCEPTION HANDLING SCENARIOS (15 STANDARD OPERATING SCENARIOS)
+--------------------------------------------------------------------------------
+
+SCENARIO 1: MISSING ELECTION DEADLINE (LATE CLIENT INSTRUCTION)
+1. What happened? A client submits a voluntary tender or rights exercise instruction after the Bank's internal cut-off deadline, though prior to the final depository market deadline.
+2. What should the operations analyst check? Check exact timestamp of receipt, remaining time until the official CSD/depository deadline, whether the client has settled shares and required cash, and whether depository submission channels (e.g., DTC ATOP) are still open.
+3. What action should be taken? Reject the instruction automatically in the standard workflow, then immediately contact the client to obtain a signed "Best-Efforts Late Instruction Indemnity Letter." If approved, process manually on a strictly best-efforts basis without guarantee.
+4. What information should be escalated? Escalate client name, account number, event ID, elected quantity, monetary exposure, and time remaining before market cutoff to the Corporate Actions Vice President (per Section 8.1 of Policy DOC-2026-POL-007).
+5. What should be documented? Log exact receipt timestamp, indemnity letter reference, VP approval timestamp, and SWIFT MT565 transmission time in the WORM audit trail.
+
+SCENARIO 2: CONFLICTING ANNOUNCEMENT DATES BETWEEN SOURCES
+1. What happened? The sub-custodian SWIFT MT564 lists an Ex-Date of October 8, while Bloomberg lists an Ex-Date of October 9 for the same event.
+2. What should the operations analyst check? Compare the raw SWIFT MT564 text, stock exchange corporate action notices, and issuer press releases to identify which source reflects the official listing exchange calendar.
+3. What action should be taken? Place the event in `DISCREPANCY-PENDING` status, suppress client notifications temporarily, and send a high-priority SWIFT MT599 query to the sub-custodian requesting confirmation of the exchange ex-date.
+4. What information should be escalated? Escalate the conflicting source payloads and affected client holdings to the Announcement Scrubbing & Data Integrity (ASDI) Team Lead if unresolved within 4 hours.
+5. What should be documented? Archive both conflicting feed snapshots, the MT599 inquiry reference, and the sub-custodian's written confirmation in the Golden Copy audit log.
+
+SCENARIO 3: INCORRECT OR UNRECOGNIZED SECURITY IDENTIFIER (ISIN/CUSIP MISMATCH)
+1. What happened? An incoming corporate action notification cites an ISIN or CUSIP that does not match any active instrument in the Bank's Security Master database.
+2. What should the operations analyst check? Verify whether the security recently underwent a name change, reverse split, merger re-indexing, or is an unmapped temporary/when-issued line, and cross-check SEDOL, ticker, and issuer name.
+3. What action should be taken? Place the event in `HOLD-SEC-MISMATCH` status and raise an urgent ticket with Reference Data Management to map or create the security shell before calculating entitlements.
+4. What information should be escalated? Escalate the raw MT564 identifier fields and any suspected client positions held under legacy identifiers to the Reference Data Supervisor within 2 hours.
+5. What should be documented? Record the original erroneous identifier, the verified mapping rule, and Reference Data sign-off ticket ID.
+
+SCENARIO 4: HOLDINGS FILE MISSING ON RECORD DATE + 1
+1. What happened? The overnight batch job fails to deliver the Record Date settled position extract from the core custody ledger, preventing entitlement calculation.
+2. What should the operations analyst check? Check batch job scheduler logs, upstream ledger connectivity, and whether the sub-custodian's SWIFT MT564 REPE (Eligible Balance) statement has arrived.
+3. What action should be taken? Trigger an emergency manual position extract from the custody database, reconcile total aggregate shares against the sub-custodian's MT564 eligible balance, and re-run the entitlement engine.
+4. What information should be escalated? Escalate the batch failure to IT Production Support and the Corporate Actions Supervisor immediately if the file is delayed past 09:00 local time.
+5. What should be documented? Log the incident ticket number, manual extract checksum, and reconciliation sign-off confirming zero share variance.
+
+SCENARIO 5: DUPLICATE ANNOUNCEMENT RECEIVED
+1. What happened? Two separate event records are created in the corporate actions system for the exact same dividend or merger due to receiving both a direct depository feed and a sub-custodian relay with different sender reference numbers (SEME).
+2. What should the operations analyst check? Compare Issuer, ISIN, Event Type, Ex-Date, Record Date, Payment Date, and Rate across both records to confirm they represent a single corporate event rather than two distinct distributions (e.g., regular + special dividend).
+3. What action should be taken? Link the secondary feed as a duplicate source under the primary Golden Copy record, cancel/archive the duplicate shell (`CANC-DUPL`), and verify no duplicate client advices were dispatched.
+4. What information should be escalated? If duplicate advices were already sent to clients, escalate to Client Service and the Team Lead to issue a formal retraction/clarification notice.
+5. What should be documented? Document both SEME references, comparison proof confirming duplication, and Maker-Checker cancellation approval.
+
+SCENARIO 6: LATE ANNOUNCEMENT (EVENT CAPTURED ON OR AFTER EX-DATE / RECORD DATE)
+1. What happened? An issuer or sub-custodian announces a corporate action (or updates terms) on or after the Ex-Date or Record Date, leaving zero advance notice window.
+2. What should the operations analyst check? Identify all historical settled positions as of Record Date, all pending trades executed between Ex-Date and announcement capture, and any open securities loans.
+3. What action should be taken? Create an expedited Golden Copy record, immediately calculate retroactive entitlements, generate manual market claims for cum-date trades, and dispatch urgent client notifications marked "LATE ANNOUNCEMENT".
+4. What information should be escalated? Escalate immediately to the Corporate Actions VP and Operational Risk Officer (mandatory trigger per Policy DOC-2026-POL-007 Section 8.1), especially if the event is voluntary with an imminent deadline.
+5. What should be documented? Document the exact timestamp the announcement was first received by the Bank to prove the Bank did not cause the delay.
+
+SCENARIO 7: ACCOUNT HOLDING INSUFFICIENT SHARES FOR SUBMITTED ELECTION
+1. What happened? A client submits a voluntary instruction to tender 10,000 shares, but the account only holds 7,500 settled shares (with 2,500 shares either unsettled or previously sold).
+2. What should the operations analyst check? Check pending purchase settlements (to see if Guaranteed Delivery / Protect applies), open short positions, or pledged collateral blocks.
+3. What action should be taken? Place the election in `PENDING-INSUFFICIENT-POS` status, send an immediate SWIFT MT567 rejection/status warning to the client, and request either an amended instruction for 7,500 shares or a Protect election (if eligible). Do NOT submit an uncovered election to the depository.
+4. What information should be escalated? Escalate to the Client Service Officer if the client fails to respond within 2 hours of the internal deadline.
+5. What should be documented? Log the settled vs. instructed share discrepancy, timestamp of client rejection notice (`MT567`), and any amended instruction received.
+
+SCENARIO 8: FRACTIONAL SHARES GENERATED BY STOCK SPLIT, MERGER, OR SPIN-OFF
+1. What happened? Applying a corporate action ratio (such as a 5-for-2 split or 0.625 merger ratio) results in non-integer share entitlements (e.g., 117.5 shares).
+2. What should the operations analyst check? Check the event terms to confirm the issuer's fractional treatment rule: Cash-in-Lieu (CIL), Round Down (forfeit fraction), or Round Up to nearest whole share.
+3. What action should be taken? Credit only whole shares (`FLOOR`) to the client's security account on Pay Date, book the fractional remainder into the CIL Receivable Suspense Account, and credit USD/EUR cash once the depository publishes the final CIL price.
+4. What information should be escalated? Escalate to the Team Lead if the depository's aggregate CIL cash credit differs from internal calculated fractional value by more than USD 10.00.
+5. What should be documented? Record the exact fractional calculation formula, depository CIL rate notice, and suspense account clearance entry.
+
+SCENARIO 9: CLIENT FAILS TO RESPOND TO A VOLUNTARY OR CHOICE EVENT
+1. What happened? The internal bank cut-off deadline passes and an eligible client has submitted no instruction.
+2. What should the operations analyst check? Confirm that initial notification and both T-5 and T-1 reminder alerts were successfully delivered to the client, and verify whether the event is Voluntary (`VOLU` -> Default is `NOAC`/Lapse) or Mandatory with Options (`CHOS` -> Default is Issuer Default Option).
+3. What action should be taken? Apply the system default action (`NOAC` for voluntary events; Issuer Default Option for `CHOS` events) once the internal cut-off passes, and close the account's open election task.
+4. What information should be escalated? If the uninstructed position has high intrinsic value (e.g., in-the-money rights expiring worthless exceeding USD 10,000 value), notify the Relationship Manager prior to market cutoff as a courtesy risk alert.
+5. What should be documented? Retain proof of delivery timestamps for the initial advice and T-5 / T-1 reminders to demonstrate full compliance with notification SLAs.
+
+SCENARIO 10: MULTIPLE OPTIONS AVAILABLE (COMPLEX CHOICE ELECTION)
+1. What happened? A merger or dividend offers 3 or more options (e.g., 100% Cash, 100% Stock, Mixed Consideration, or Currency Election) with proration caps.
+2. What should the operations analyst check? Verify whether the client submitted a single election or split instructions across sub-lots, and check if any option requires tax residency certification or QIB status.
+3. What action should be taken? Validate each option line separately against total settled holdings to ensure the sum of elected shares does not exceed 100% of the eligible balance, then transmit separate depository VOI instructions per option code.
+4. What information should be escalated? Escalate if a client's split election exceeds total holdings or selects mutually exclusive options on the same tax lot.
+5. What should be documented? Record the option-by-option breakdown, proration factor applied upon settlement, and resulting cash/stock split postings.
+
+SCENARIO 11: UNCLEAR ACCOUNT ELIGIBILITY (RESTRICTED JURISDICTION OR PLEDGED COLLATERAL)
+1. What happened? An account holds settled shares in a rights offering or tender offer, but is flagged with a US Person restriction or a Prime Brokerage collateral pledge lien.
+2. What should the operations analyst check? Review the Prospectus / Offer to Purchase jurisdictional legend and check the Collateral Management System to identify the pledgee desk.
+3. What action should be taken? Hold the election in `ELIGIBILITY-REVIEW`. For pledged shares, request formal written release from the Margin/Collateral Desk before tendering; for restricted jurisdictions, obtain Legal & Compliance sign-off (e.g., QIB letter) or enforce mandatory rights sale/exclusion.
+4. What information should be escalated? Escalate immediately to Legal & Compliance (for jurisdictional blocks) or the Margin Risk VP (for pledged assets).
+5. What should be documented? Attach the signed Margin Desk release or Compliance clearance memo to the event record before Four-Eyes approval.
+
+SCENARIO 12: CURRENCY MISMATCH ON CASH ENTITLEMENT
+1. What happened? A cash dividend or merger payout settles in USD or EUR, but the client's custody account only has a GBP cash ledger open and no multi-currency sub-account.
+2. What should the operations analyst check? Check the client's Standing Settlement Instructions (SSI) and FX Standing Instructions to see if auto-FX conversion is authorized or if funds must be held in a suspense account.
+3. What action should be taken? If auto-FX is authorized, route the net cash entitlement to the Treasury FX Desk for conversion at the benchmark fixing rate and post GBP proceeds; otherwise, hold funds in `SUSP-CCY-MISMATCH` and request client SSI instructions.
+4. What information should be escalated? Escalate any unapplied currency suspense balance exceeding USD 50,000 equivalent remaining unresolved after 48 hours.
+5. What should be documented? Record the original settlement currency amount, applied FX spot rate, spread, and converted ledger posting reference.
+
+SCENARIO 13: EVENT CANCELLATION / WITHDRAWAL BY ISSUER
+1. What happened? Prior to Payment or Expiration Date, the issuer announces that a previously declared dividend, split, or tender offer has been officially canceled or withdrawn (`MT564 CANC`).
+2. What should the operations analyst check? Identify all pending accounting entries, blocked tender positions (`BLOC-TEND`), reserved subscription cash holds, and open market claims tied to the canceled event ID.
+3. What action should be taken? Update Golden Copy status to `CANCELED`, release all blocked share positions back to `FREE` trading status, release any reserved cash holds, cancel open depository instructions, and dispatch an urgent `MT564 CANC` notice to all clients.
+4. What information should be escalated? Escalate to the Corporate Actions Supervisor and Settlements Desk if any market claims were already settled in cash and require reversal.
+5. What should be documented? Archive the issuer's cancellation notice (`MT564 CANC`), proof of unblocking of client securities/cash, and client notification logs.
+
+SCENARIO 14: MATERIAL AMENDMENT TO ANNOUNCEMENT TERMS
+1. What happened? An offeror increases a tender offer price (e.g., from USD 42.50 to USD 45.00), extends the expiration deadline, or modifies a dividend payment date.
+2. What should the operations analyst check? Check whether existing client elections remain valid under the amended terms or if the depository requires re-submission / re-confirmation of prior instructions.
+3. What action should be taken? Update the Golden Copy record under Four-Eyes control, recalculate expected entitlements, dispatch an updated `MT564 REPL` (Replacement) notification to all clients, and solicit re-elections if required by the offer terms.
+4. What information should be escalated? Escalate to the Team Lead if the amendment occurs within 24 hours of the internal cut-off deadline.
+5. What should be documented? Retain version history comparing pre-amendment and post-amendment terms alongside replacement client advices.
+
+SCENARIO 15: REJECTED ELECTION BY DEPOSITORY OR PAYING AGENT
+1. What happened? After transmitting a client election (`MT565`), the sub-custodian or CSD returns a `SWIFT MT567` status message rejecting the instruction (e.g., due to missing beneficial owner tax ID, invalid lot size, or missed market cutoff).
+2. What should the operations analyst check? Read the exact ISO 15022 rejection reason code (`REJT`) in the `MT567` message and determine whether the error can be corrected and resubmitted before the market deadline.
+3. What action should be taken? If curable before market cutoff, immediately remediate the missing data, re-verify under Four-Eyes control, and resubmit. If non-curable or past market cutoff, unblock the client's shares, notify the client immediately via `MT567`, and initiate root-cause investigation.
+4. What information should be escalated? Escalate immediately to the Corporate Actions VP and Operational Risk Officer if the rejection resulted from an internal bank processing error (potential operational loss event).
+5. What should be documented? Log the full `MT567` rejection payload, remediation steps taken, timestamps, and Operational Risk incident reference if applicable.
+================================================================================
+END OF DOCUMENT DOC-2026-RUN-008
+================================================================================

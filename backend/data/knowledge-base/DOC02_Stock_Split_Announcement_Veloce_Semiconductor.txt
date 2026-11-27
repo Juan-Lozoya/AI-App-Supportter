@@ -1,0 +1,86 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - FORWARD STOCK SPLIT (SPLF)
+================================================================================
+Document ID:        DOC-2026-CA-002
+Event Type:         Forward Stock Split (Mandatory)
+ISO 15022 Code:     SPLF
+Issuer Name:        Veloce Semiconductor Corporation
+Security Name:      Veloce Semiconductor Corporation Common Stock
+Old ISIN:           US92264B1052
+New ISIN:           US92264B2043 (Note: Mandatory ISIN change upon split effective date)
+CUSIP (Old / New):  92264B105 / 92264B204
+Ticker Symbol:      VLCE (NASDAQ)
+Split Ratio:        5-for-2 (2.5 new shares for every 1 old share held)
+Announcement Date:  2026-08-19
+Record Date:        2026-09-18
+Effective Date:     2026-09-28
+Ex-Date:            2026-09-28
+Pay / Distribution: 2026-09-25 (After market close; reflects in accounts on 2026-09-28)
+Status:             CONFIRMED / MANDATORY
+================================================================================
+
+1. EXECUTIVE SUMMARY AND EVENT TERMS
+The Board of Directors of Veloce Semiconductor Corporation ("Veloce" or the "Company") has approved a 5-for-2 forward stock split of its authorized and issued Common Stock. Under the terms of the split, each holder of record at the close of business on September 18, 2026, will receive 2.5 shares of post-split Common Stock for each 1 share of pre-split Common Stock held (an incremental distribution of 1.5 additional shares per existing share).
+
+In conjunction with this corporate action, Veloce Semiconductor Corporation is executing a mandatory security identifier change. Pre-split shares trading under ISIN US92264B1052 (CUSIP 92264B105) will be retired and replaced on a 2.5-for-1 basis with post-split shares carrying ISIN US92264B2043 (CUSIP 92264B204). The NASDAQ ticker symbol "VLCE" will remain unchanged.
+
+2. CRITICAL DATES AND SCHEDULE
+All times are Eastern Daylight Time (EDT / UTC-4).
+
+| Event Milestone | Date | Time (EDT) | Operational Impact |
+| :--- | :--- | :--- | :--- |
+| Board Approval & Announcement | 2026-08-19 | 16:15 | Event created in custody engine; initial MT564 transmitted. |
+| Due-Bill Trading Period Start | 2026-09-21 | 09:30 | Trades executed from Sept 21 to Sept 25 carry Due-Bills for split shares. |
+| Record Date | 2026-09-18 | 17:00 | Depository record date for determining registered split entitlements. |
+| Distribution / Pay Date | 2026-09-25 | 20:00 | DTC allocates split shares after market close on Friday, Sept 25. |
+| Ex-Date & Effective Date | 2026-09-28 | 09:30 | VLCE commences trading on NASDAQ on a split-adjusted basis under new ISIN. |
+| Due-Bill Redemption Date | 2026-09-29 | 17:00 | DTC settles all outstanding Due-Bill obligations between buyers and sellers. |
+| Fractional Cash-in-Lieu Pay | 2026-10-05 | 12:00 | Anticipated distribution of Cash-in-Lieu (CIL) proceeds for fractional shares. |
+
+3. SHARE QUANTITY ADJUSTMENT EXAMPLES AND FRACTIONAL TREATMENT
+3.1 Calculation Methodology
+Because the split ratio is 5-for-2 (multiplier = 2.5), any shareholder holding an odd number of pre-split shares will generate a fractional entitlement of 0.5 shares.
+- New Total Position = Old Settled Position * 2.5
+- Incremental Shares Issued = Old Settled Position * 1.5
+
+3.2 Treatment of Fractional Shares (Cash-in-Lieu)
+No fractional shares of Veloce Semiconductor Corporation Common Stock will be issued or registered on the books of the transfer agent (Equiniti Trust Company). All fractional entitlements resulting from the 5-for-2 split will be aggregated at the central depository (DTC) level, sold in the open market by the transfer agent on September 28, 2026, and settled as Cash-in-Lieu (CIL) in USD on October 5, 2026. The CIL reference price will be determined by the volume-weighted average price (VWAP) of post-split VLCE shares on September 28, 2026.
+
+3.3 Worked Position Adjustment Examples
+Assume a hypothetical post-split VWAP CIL price of USD 64.00 per share for illustration:
+
+| Account | Pre-Split Shares (US92264B1052) | Raw Calculated Entitlement (x 2.5) | Whole Post-Split Shares Credited (US92264B2043) | Fractional Remainder | Cash-in-Lieu (CIL) Payout (@ $64.00/sh) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Account A | 100 | 250.0 | 250 | 0.0 | USD 0.00 |
+| Account B | 101 | 252.5 | 252 | 0.5 | USD 32.00 |
+| Account C | 47 | 117.5 | 117 | 0.5 | USD 32.00 |
+| Account D | 1 | 2.5 | 2 | 0.5 | USD 32.00 |
+
+4. IMPACT ON HOLDINGS, COST BASIS, AND OPEN ORDERS
+- Market Value Neutrality: On the Effective Date (September 28, 2026), the theoretical market price per share of VLCE will adjust to 40% (2/5ths) of its closing price on September 25, 2026, keeping aggregate portfolio market value unchanged prior to intraday market fluctuations.
+- Cost Basis Allocation: Total historical tax cost basis must be preserved across the new whole shares (adjusted slightly downward for any fraction sold for Cash-in-Lieu, which triggers a minor realized capital gain/loss event on the 0.5 fractional share). Per-share cost basis is divided by 2.5.
+- Open Orders & Derivatives: All Good-Til-Canceled (GTC) limit orders on the execution desk for VLCE will be automatically canceled by NASDAQ after market close on September 25, 2026. Listed options contracts (OCC) will undergo standard contract adjustments (deliverable becomes 250 shares per contract with strike prices divided by 2.5).
+
+5. OPERATIONAL PROCESSING INSTRUCTIONS
+5.1 Security Master Setup (Prior to 2026-09-21)
+1. Create the new security shell in the Security Master database for ISIN US92264B2043 / CUSIP 92264B204 with status "PENDING EFFECTIVE".
+2. Link Old ISIN US92264B1052 to New ISIN US92264B2043 via corporate action event ID `CA-VLCE-SPLF-2026`.
+3. Verify that no manual trading is permitted in US92264B2043 prior to 09:30 EDT on September 28, 2026.
+
+5.2 Due-Bill Tracking (2026-09-21 through 2026-09-25)
+Because the Ex-Date (September 28) occurs after the Record Date (September 18), a five-business-day Due-Bill window applies.
+- Any client purchasing VLCE between September 21 and September 25 (inclusive) is entitled to the 1.5 incremental split shares even though they were not on the books on September 18.
+- Operations analysts must monitor the DTC Due-Bill Fail Report daily and ensure internal accounting engines do not prematurely lock positions based solely on the September 18 Record Date snapshot.
+
+5.3 Position Transformation (Weekend Batch: 2026-09-26 to 2026-09-27)
+1. Debit 100% of settled balances in Old ISIN US92264B1052 after settlement cycle completion on Friday, September 25.
+2. Credit whole post-split shares (`FLOOR(Old_Qty * 2.5)`) to New ISIN US92264B2043 effective 00:01 EDT on Monday, September 28.
+3. Book any 0.5 fractional remainder into the Fractional CIL Receivable Suspense Account (`SUSP-CIL-VLCE`) pending cash receipt on October 5, 2026.
+
+6. OPERATIONAL EXCEPTIONS AND RISK CONTROLS
+- ISIN Mismatch on Unsettled Trades: Trades executed before September 28 under Old ISIN US92264B1052 that settle on or after September 28 (T+1 fails) will automatically transform at DTC into New ISIN US92264B2043 at the 2.5x quantity. Analysts must ensure internal trade-matching systems apply the transformation factor to prevent false break alerts.
+- Pledged Collateral Freeze: Accounts with VLCE shares pledged as margin collateral require automated collateral substitution notifications to the Prime Brokerage Margin Desk so margin requirements are not artificially breached during the overnight ISIN swap.
+- Unannounced CIL Rate Delay: If the transfer agent delays publishing the final CIL rate beyond 14:00 EDT on October 5, 2026, the Corporate Actions team must place a temporary hold on CIL client postings and notify client service representatives rather than posting estimated prices.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-002
+================================================================================

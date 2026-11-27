@@ -1,0 +1,82 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - MANDATORY CASH AND STOCK MERGER (MRGR)
+================================================================================
+Document ID:        DOC-2026-CA-004
+Event Type:         Merger / Acquisition (Mandatory Mixed Consideration)
+ISO 15022 Code:     MRGR
+Acquirer Company:   Northstar Logistics & Freight Corp.
+Acquirer Security:  Northstar Logistics & Freight Corp. Common Stock
+Acquirer ISIN:      US66704R1032
+Acquirer Ticker:    NSLF (NYSE)
+Target Company:     Meridian Rail Systems Inc.
+Target Security:    Meridian Rail Systems Inc. Common Stock
+Target ISIN:        US58962K1097
+Target Ticker:      MRSI (NYSE)
+Announcement Date:  2026-05-12
+Shareholder Vote:   2026-08-27 (Approved by 91.4% of Meridian shareholders)
+Effective Date:     2026-10-15 (After market close)
+Expected Settlement:2026-10-19 (T+2 post-effective allocation)
+Merger Terms:       0.625 shares of NSLF Common Stock + USD 18.40 cash per MRSI share
+Status:             CONFIRMED / MANDATORY
+================================================================================
+
+1. TRANSACTION SUMMARY AND MERGER TERMS
+Northstar Logistics & Freight Corp. ("Northstar") and Meridian Rail Systems Inc. ("Meridian") have completed all regulatory and shareholder approvals for the acquisition of Meridian by Northstar pursuant to the Agreement and Plan of Merger dated May 12, 2026.
+
+Effective at 17:00 EDT on October 15, 2026 (the "Effective Date"), Meridian Rail Systems Inc. will merge with and into a wholly owned subsidiary of Northstar, and each issued and outstanding share of Meridian Common Stock (ISIN: US58962K1097) will be automatically converted into the right to receive **Fixed Mixed Consideration** consisting of:
+- **Stock Component:** 0.625 shares of Northstar Logistics & Freight Corp. Common Stock (ISIN: US66704R1032) per 1 share of Meridian Common Stock; AND
+- **Cash Component:** USD 18.40 in cash per 1 share of Meridian Common Stock.
+
+This is a **Mandatory Corporate Action without Election** (fixed consideration; no cash/stock election proration applies).
+
+2. KEY DATES AND SETTLEMENT TIMELINE
+
+| Event Milestone | Date | Time (EDT) | Operational Description |
+| :--- | :--- | :--- | :--- |
+| Definitive Merger Announcement | 2026-05-12 | 07:00 | Initial merger agreement terms announced. |
+| Special Shareholder Meeting | 2026-08-27 | 10:00 | Meridian stockholders ratify merger agreement. |
+| Final Trading Day of MRSI | 2026-10-15 | 16:00 | Last regular-way trading day for Meridian (MRSI) on NYSE. |
+| Merger Effective Date | 2026-10-15 | 17:00 | Certificate of Merger filed in Delaware; MRSI suspended/delisted. |
+| Expected Settlement / Pay Date | 2026-10-19 | 12:00 | Depository distributes NSLF shares, USD 18.40 cash, and CIL proceeds. |
+
+3. TREATMENT OF OLD SHARES, NEW SHARES, AND FRACTIONAL ENTITLEMENTS
+3.1 Treatment of Old Shares (Meridian - US58962K1097)
+At the Effective Date (October 15, 2026 at 17:00 EDT), all shares of Meridian Rail Systems Inc. Common Stock (US58962K1097) cease to exist as an independent equity security and are extinguished from the clearing system. Holders no longer possess voting or dividend rights in Meridian.
+
+3.2 Treatment of New Shares (Northstar - US66704R1032)
+New shares of Northstar Logistics & Freight Corp. Common Stock (US66704R1032) will be issued in book-entry form via DTC on October 19, 2026. The new NSLF shares rank pari passu with existing Northstar Common Stock and are eligible for Northstar's next scheduled quarterly dividend (Record Date: November 13, 2026).
+
+3.3 Fractional Share Handling (Cash-in-Lieu)
+Northstar will not issue fractional shares of its Common Stock in connection with the merger. Each former Meridian shareholder who would otherwise be entitled to receive a fraction of a share of Northstar Common Stock (e.g., 0.125, 0.250, 0.375, 0.500, 0.625, 0.750, or 0.875 of a share) will receive Cash-in-Lieu (CIL) in USD equal to that fractional interest multiplied by **USD 112.00** (the volume-weighted average closing price of NSLF on the NYSE for the five consecutive trading days ending on October 14, 2026, as stipulated in Section 2.4(c) of the Merger Agreement).
+
+3.4 Worked Entitlement Calculation Examples
+Using the contractual CIL reference price of USD 112.00 per NSLF share:
+
+| Pre-Merger MRSI Shares | Cash Component ($18.40/sh) | Raw NSLF Stock (x 0.625) | Whole NSLF Shares Credited | Fractional NSLF Remainder | Cash-in-Lieu (@ $112.00/sh) | Total Cash Credited (Base + CIL) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 800 | USD 14,720.00 | 500.000 | 500 | 0.000 | USD 0.00 | USD 14,720.00 |
+| 100 | USD 1,840.00 | 62.500 | 62 | 0.500 | USD 56.00 | USD 1,896.00 |
+| 25 | USD 460.00 | 15.625 | 15 | 0.625 | USD 70.00 | USD 530.00 |
+| 1 | USD 18.40 | 0.625 | 0 | 0.625 | USD 70.00 | USD 88.40 |
+
+4. ACCOUNT ELIGIBILITY AND TAX CONSIDERATIONS
+- Eligible Accounts: All settled positions in US58962K1097 as of close of business on October 15, 2026, plus any unsettled regular-way trades executed on or before October 15, 2026 (which will undergo automatic DTC CNS transformation).
+- Restricted / Sanctioned Accounts: Accounts subject to OFAC sanctions or missing valid KYC/AML documentation will have their NSLF shares and USD cash proceeds segregated into a blocked compliance escrow account (`ESCROW-OFAC-MRGR`) pending Legal & Compliance clearance.
+- Tax Characterization: Under IRC Section 368(a), the transaction is structured as a partially taxable reorganization ("boot" transaction). The stock component (0.625 NSLF shares) generally receives tax-deferred rollover treatment for US taxpayers, whereas the cash consideration (USD 18.40 per share plus any CIL) is recognized as taxable capital gain up to the total gain realized on the exchange. Non-US holders are generally exempt from US withholding tax on merger capital proceeds provided a valid Form W-8BEN/W-8BEN-E is active.
+
+5. OPERATIONAL PROCESSING INSTRUCTIONS
+1. **Freeze Trading (2026-10-15 at 16:00 EDT):** Immediately suspend order entry on internal OMS platforms for MRSI (US58962K1097) at market close on October 15.
+2. **Position Snapshot & Escrow Transfer (2026-10-16):** Move all settled MRSI balances into a non-tradable contra-CUSIP / merger suspense line (`MRGR-SUSP-58962K`) while awaiting depository delivery.
+3. **Settlement Reconciliation (2026-10-19):** Upon receipt of SWIFT MT566 confirmations from DTC:
+   - Credit whole NSLF shares (`US66704R1032`) under transaction code `MRGR-STK-REC`.
+   - Credit combined USD cash consideration (`Base Cash + CIL`) under transaction code `MRGR-CSH-REC`.
+   - Extinguish the contra-CUSIP suspense balance (`MRGR-SUSP-58962K`) to zero.
+4. **Portfolio Accounting / Cost Basis Update:** Transfer adjusted historical cost basis from MRSI to the newly received NSLF shares in accordance with IRC Section 358 allocation rules.
+
+6. OPERATIONAL RISKS AND EXCEPTIONS
+- **Dissenters' / Appraisal Rights Elections:** Any institutional client who voted AGAINST the merger on August 27, 2026, and formally demanded statutory appraisal rights under Delaware law must have their shares excluded from the automated merger exchange. Operations must verify the Legal Dissenters Hold List prior to October 15; failing to segregate dissenting shares will forfeit the client's legal appraisal claim.
+- **Unsettled Short Positions:** Client accounts holding a short position in MRSI over the Effective Date will automatically owe 0.625 shares of NSLF plus USD 18.40 cash per shorted share. Prime Brokerage Risk must verify sufficient cash and borrow availability in short accounts by October 16, 2026.
+- **Corporate Action Transformation Breaks:** Trades in MRSI executed on October 14 or October 15 that fail to settle on T+1 (October 15 or October 16) will settle in NSLF shares + cash. Settlements and Corporate Actions must jointly reconcile CNS fail reports on October 19 to prevent duplicate cash postings.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-004
+================================================================================

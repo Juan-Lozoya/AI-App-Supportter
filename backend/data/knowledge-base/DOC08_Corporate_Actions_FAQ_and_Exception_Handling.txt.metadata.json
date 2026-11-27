@@ -1,0 +1,22 @@
+{
+  "metadataAttributes": {
+    "document_id": "DOC-2026-RUN-008",
+    "document_type": "Operational FAQ & Runbook",
+    "company_name": "Vanguardia Global Custody & Investment Bank N.A.",
+    "event_type": "Exception Handling & FAQ",
+    "announcement_date": "2026-10-15",
+    "announcement_date_num": 20261015,
+    "security_id": "ALL-ASSET-CLASSES",
+    "keywords": [
+      "FAQ",
+      "exception handling",
+      "late election",
+      "conflicting dates",
+      "ISIN mismatch",
+      "missing holdings file",
+      "duplicate announcement",
+      "rejected MT567",
+      "record date vs ex-date"
+    ]
+  }
+}

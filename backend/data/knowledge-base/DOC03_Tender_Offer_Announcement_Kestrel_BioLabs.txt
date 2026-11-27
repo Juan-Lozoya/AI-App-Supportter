@@ -1,0 +1,80 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - VOLUNTARY CASH TENDER OFFER (TEND)
+================================================================================
+Document ID:        DOC-2026-CA-003
+Event Type:         Voluntary Cash Tender Offer
+ISO 15022 Code:     TEND
+Offeror:            Helios Pharmaceutical Group AG (Switzerland)
+Target Company:     Kestrel BioLabs Inc. (Delaware, USA)
+Target Security:    Kestrel BioLabs Inc. Common Stock
+Target ISIN:        US49251M1080
+Target CUSIP:       49251M108
+Target Ticker:      KBLB (NYSE)
+Offer Price:        USD 42.50 per share in cash (net of any applicable transfer taxes)
+Offer Currency:     USD
+Offer Launch Date:  2026-10-01
+Market Expiration:  2026-11-02 at 17:00 EST (New York Time)
+Internal Cutoff:    2026-10-30 at 15:00 EST (Mandatory Bank Response Deadline)
+Proration / Min:    Minimum tender condition of 66.67% of fully diluted shares; no maximum cap (Any-and-All above threshold)
+Status:             OPEN FOR ELECTIONS
+================================================================================
+
+1. OVERVIEW OF THE TENDER OFFER
+Helios Pharmaceutical Group AG ("Helios" or the "Offeror"), through its wholly owned acquisition subsidiary Helios Merger Sub Inc., has commenced a voluntary, public cash tender offer to purchase all outstanding shares of Common Stock of Kestrel BioLabs Inc. ("Kestrel" or the "Target"), ISIN US49251M1080, at an offer price of USD 42.50 per share in cash, without interest and less any required withholding taxes.
+
+This event is classified as a **Voluntary Corporate Action**. No action will be taken on client holdings unless an explicit, valid election instruction is received prior to the internal bank deadline.
+
+2. KEY DATES, DEADLINES, AND CUT-OFF SCHEDULE
+Operations personnel must enforce the internal bank deadline strictly to allow sufficient time for DTC ATOP (Automated Tender Offer Program) submission and quality control.
+
+| Event Milestone | Date | Time (EST) | Notes / Operational Rules |
+| :--- | :--- | :--- | :--- |
+| Offer Commencement Date | 2026-10-01 | 08:00 | Offer to Purchase (Schedule TO) filed with SEC; MT564 issued. |
+| Client Notification SLA | 2026-10-02 | 17:00 | Mandatory dispatch of election notices to all eligible holders. |
+| Guaranteed Delivery Notice Cutoff | 2026-10-30 | 12:00 | Internal cutoff for Notice of Guaranteed Delivery (Protect) elections. |
+| Internal Bank Election Deadline | 2026-10-30 | 15:00 | Hard cutoff for client instructions to tender or withdraw shares. |
+| Market / Depository Expiration | 2026-11-02 | 17:00 | Official DTC ATOP expiration deadline (unless extended by Offeror). |
+| Protect Delivery Settlement | 2026-11-04 | 17:00 | T+2 NYSE trading day deadline to deliver shares under Guaranteed Delivery. |
+| Anticipated Payment Date | 2026-11-06 | 12:00 | Expected cash settlement for accepted tendered shares. |
+
+3. CONDITIONS OF THE OFFER AND PRORATION RULES
+3.1 Minimum Tender Condition
+Consummation of the Tender Offer is conditioned upon there being validly tendered and not properly withdrawn prior to the Market Expiration Date a number of shares representing at least **66.67% (two-thirds)** of the total voting power of Kestrel BioLabs Inc. on a fully diluted basis. If the 66.67% minimum threshold is not met and is not waived by Helios, the Offer will expire unconsummated and all tendered shares will be returned free of payment within 3 business days.
+
+3.2 Maximum Condition and Back-End Merger
+There is no maximum cap on the number of shares accepted; Helios will purchase 100% of validly tendered shares provided the 66.67% minimum threshold and regulatory antitrust clearances (HSR Act) are satisfied. If Helios acquires at least 66.67% of shares, it intends to effect a short-form second-step merger under Delaware General Corporation Law (DGCL Section 251(h)) at the same USD 42.50 cash price per share.
+
+4. SHAREHOLDER OPTIONS AND ELECTION INSTRUCTIONS
+Eligible holders of settled Kestrel BioLabs Inc. Common Stock (US49251M1080) may select from the following options:
+
+- **Option 1: TENDER SHARES FOR CASH (ACTN: TEND)**
+  Instruct the custodian to tender a specified whole number of shares into the offer via DTC ATOP. Upon election processing, tendered shares are moved from the client's free trading account (`FREE`) into a segregated tender suspense sub-account (`BLOC-TEND-KBLB`) and cannot be sold or transferred unless properly withdrawn.
+- **Option 2: TENDER VIA NOTICE OF GUARANTEED DELIVERY / PROTECT (ACTN: PROT)**
+  Available solely for clients with pending buy trades scheduled to settle on or before November 4, 2026. Requires explicit client indemnity for buy-in penalties if shares fail to settle within 2 NYSE trading days post-expiration.
+- **Option 3: TAKE NO ACTION (DEFAULT - ACTN: NOAC)**
+  Retain shares in the free account. Note: If the tender offer succeeds and the subsequent DGCL Section 251(h) back-end merger is executed, non-tendering shareholders will be mandatorily cashed out at USD 42.50 per share (subject to statutory appraisal rights under Delaware law, which must be exercised directly by the registered holder outside the clearing system).
+
+5. WITHDRAWAL RIGHTS
+Shares tendered pursuant to the Offer may be withdrawn at any time prior to the Market Expiration Date (November 2, 2026 at 17:00 EST), and, unless previously accepted for payment by the Offeror, at any time after November 30, 2026 (60 days from commencement pursuant to SEC Rule 14d-7).
+- Internal Withdrawal Cutoff: Clients wishing to revoke an earlier tender instruction must submit a formal written Withdrawal Instruction (`CANC-TEND`) no later than **October 30, 2026 at 15:00 EST**.
+- Partial Withdrawals: Permitted in whole-share increments; remaining tendered shares stay locked in ATOP.
+
+6. OPERATIONAL PROCESSING PROCEDURES
+6.1 Instruction Validation
+Upon receipt of a client election via SWIFT MT565 or the Institutional Corporate Actions Portal:
+1. Verify account eligibility and confirm settled share balance in `US49251M1080` is greater than or equal to the elected tender quantity.
+2. Confirm election quantity is expressed in whole shares (fractional shares cannot be tendered; any fractional holdings remain in the account).
+3. Perform Four-Eyes review before transmitting the Voluntary Offer Instruction (VOI) via DTC ATOP.
+
+6.2 Accounting and ATOP Transmission
+1. Segregate elected shares (`DR FREE / CR BLOC-TEND-KBLB`) immediately upon instruction validation to prevent accidental double-selling on the trading desk.
+2. Transmit VOI to DTC prior to 16:00 EST on October 30, 2026, and record the unique DTC ATOP Agent Message / Confirmation Number in the event tracking log.
+3. Upon cash payment on November 6, 2026, debit the blocked share position (`BLOC-TEND-KBLB`) permanently and credit client USD cash accounts at USD 42.50 per share.
+
+7. RISKS AND EXCEPTION HANDLING
+- Overselling Risk: If a portfolio manager sells shares after submitting a tender instruction without first executing a valid withdrawal, the trade will fail at settlement. Trade-block flags must remain active on `BLOC-TEND-KBLB` until either payment or formal withdrawal confirmation.
+- Extension of Offer Period: Tender offers are frequently extended if the 66.67% minimum threshold is not initially met. If Helios extends the expiration date (announced via press release and MT564), the Corporate Actions team must update system deadlines within 2 hours and notify all non-instructed clients of the revised cut-off.
+- Unsettled Purchases: Clients purchasing KBLB on October 29 or October 30 (which settle T+1 on October 30 or November 2) cannot tender via standard ATOP unless shares are settled prior to submission; they must utilize Option 2 (Notice of Guaranteed Delivery) before 12:00 EST on October 30.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-003
+================================================================================

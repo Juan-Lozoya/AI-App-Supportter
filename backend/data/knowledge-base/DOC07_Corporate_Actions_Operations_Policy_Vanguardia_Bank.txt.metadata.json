@@ -1,0 +1,24 @@
+{
+  "metadataAttributes": {
+    "document_id": "DOC-2026-POL-007",
+    "document_type": "Internal Operations Policy",
+    "company_name": "Vanguardia Global Custody & Investment Bank N.A.",
+    "event_type": "Governance & Risk Policy",
+    "announcement_date": "2026-01-15",
+    "announcement_date_num": 20260115,
+    "security_id": "ALL-ASSET-CLASSES",
+    "keywords": [
+      "operations policy",
+      "Golden Copy",
+      "Four-Eyes principle",
+      "Maker-Checker",
+      "cut-off buffers",
+      "MAND",
+      "CHOS",
+      "VOLU",
+      "escalation",
+      "WORM audit trail",
+      "SEC 17a-4"
+    ]
+  }
+}

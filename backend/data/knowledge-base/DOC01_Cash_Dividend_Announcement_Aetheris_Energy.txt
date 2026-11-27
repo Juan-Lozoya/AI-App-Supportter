@@ -1,0 +1,82 @@
+================================================================================
+CORPORATE ACTION NOTIFICATION - CASH DIVIDEND ANNOUNCEMENT (DVCA)
+================================================================================
+Document ID:        DOC-2026-CA-001
+Event Type:         Cash Dividend (Mandatory)
+ISO 15022 Code:     DVCA
+Issuer Name:        Aetheris Energy Holdings PLC
+Security Name:      Aetheris Energy Holdings PLC Ordinary Shares
+ISIN:               GB00B9X4K218
+CUSIP:              G0124A109
+SEDOL:              B9X4K21
+Ticker Symbol:      AETH (LSE) / AETHY (OTC)
+Announcement Date:  2026-09-14
+Ex-Dividend Date:   2026-10-08
+Record Date:        2026-10-09
+Payment Date:       2026-10-30
+Dividend Rate:      USD 1.45 per ordinary share (Gross)
+Default Currency:   USD (United States Dollar)
+Status:             CONFIRMED / FINAL
+Source:             Issuer Registrar & Global Custodian SWIFT MT564
+================================================================================
+
+1. EXECUTIVE SUMMARY AND EVENT OVERVIEW
+Aetheris Energy Holdings PLC ("Aetheris" or the "Issuer") has formally declared a quarterly interim cash dividend of USD 1.45 per ordinary share for the third fiscal quarter ended August 31, 2026. This distribution is classified as a Mandatory Corporate Action with no shareholder election options; all eligible settled positions as of close of business on the Record Date (October 9, 2026) will automatically receive the cash entitlement on the Payment Date (October 30, 2026).
+
+2. KEY DATES AND OPERATIONAL TIMELINE
+All times referenced below are in Greenwich Mean Time (GMT) unless explicitly stated otherwise. Operations teams must strictly adhere to internal market cut-off buffers ahead of depository deadlines.
+
+| Milestone / Event Stage | Date | Time (GMT) | Operational Significance |
+| :--- | :--- | :--- | :--- |
+| Board Declaration / Announcement | 2026-09-14 | 07:30 | Initial SWIFT MT564 REPE received from sub-custodian. |
+| Last Cum-Dividend Trade Date | 2026-10-07 | 16:30 | Final day to purchase shares with dividend entitlement attached. |
+| Ex-Dividend Date (Ex-Date) | 2026-10-08 | 08:00 | Shares trade without dividend entitlement; market price adjusts downward. |
+| Record Date | 2026-10-09 | 17:00 | Snapshot of settled positions in CREST / DTC determines entitlement. |
+| Tax Documentation Cut-Off | 2026-10-16 | 14:00 | Deadline for W-8BEN / W-8BEN-E / UK Residency certificates for relief at source. |
+| Depository Pay Date | 2026-10-30 | 09:00 | Issuer paying agent credits central securities depository (CSD). |
+| Internal Client Credit SLA | 2026-10-30 | 15:00 | Target posting time to client cash accounts upon receipt of funds. |
+
+3. ENTITLEMENT CALCULATION AND ELIGIBILITY CRITERIA
+3.1 Eligible Shareholders
+Shareholders of record holding settled long positions in Aetheris Energy Holdings PLC Ordinary Shares (ISIN: GB00B9X4K218) at 17:00 GMT on October 9, 2026, are eligible to receive the distribution.
+- Unsettled Purchases: Trades executed on or before October 7, 2026 (Cum-Date) that fail to settle by the Record Date will generate automated market claims (buy-in / compensation claims) through the depository's transformation and claim engine.
+- Securities Lending: Positions out on loan over the Record Date are ineligible for direct issuer payment; the Corporate Actions Income team must issue a manufactured dividend claim to the respective borrower desk by Record Date + 1 (October 12, 2026).
+- Collateral / Repo Positions: Tri-party repo collateral holders must verify bilateral agreement terms to determine whether the economic benefit reverts to the collateral giver.
+
+3.2 Formula and Rounding Rules
+Gross Entitlement = Settled Record Date Share Quantity * USD 1.45
+- Cash calculations are truncated at the fourth decimal place during intermediate ledger aggregation and rounded to two decimal places (standard half-up rounding to the nearest USD 0.01) at the individual client account level.
+- Example: A client holding 1,235 shares receives 1,235 * 1.45 = USD 1,790.75 gross. A client holding 33 shares receives 33 * 1.45 = USD 47.85 gross.
+
+4. TAXATION AND WITHHOLDING CONSIDERATIONS
+Although Aetheris Energy Holdings PLC is incorporated in the United Kingdom, the Issuer maintains a dual-listed tax election structure where dividends paid out of its North American midstream subsidiary earnings are subject to statutory withholding rules depending on beneficiary domicile:
+- Standard Statutory Withholding Rate: 20.00% default withholding tax applies to uncertified accounts or omnibus accounts lacking beneficial owner breakdown.
+- Qualified Intermediary (QI) / Treaty Relief at Source: Eligible institutional clients holding valid IRS Form W-8BEN-E or UK HMRC Double Taxation Treaty declarations on file prior to 14:00 GMT on October 16, 2026, qualify for a reduced withholding rate of 0.00% (exempt pension funds) or 15.00% (standard treaty rate).
+- Domestic Retail / Individual Accounts: Valid Form W-8BEN reduces withholding from 20.00% to 15.00%.
+- Tax Reclaim Window: Clients missing the October 16, 2026 relief-at-source cut-off may file a long-form tax reclaim within 24 months of Payment Date, subject to a USD 75.00 administrative processing fee per claim.
+
+5. OPERATIONAL PROCESSING INSTRUCTIONS
+5.1 Announcement Capture and Scrubbing (Day 0 - Day 2)
+1. Ingest incoming SWIFT MT564 (Corporate Action Notification) from primary sub-custodian (Citibank London / Euroclear).
+2. Cross-verify ISIN (GB00B9X4K218), Ex-Date (2026-10-08), Record Date (2026-10-09), Pay Date (2026-10-30), and Gross Rate (USD 1.45) against secondary market data vendor feeds (Bloomberg Corporate Actions and ICE Data Services).
+3. Confirm event status is "CONFIRMED" (ENTL) and not "PRELIMINARY" (PREC) before releasing client advices.
+
+5.2 Position Reconciliation (Record Date + 1: 2026-10-12)
+1. Extract settled ledger balances from the core custody platform as of 17:00 GMT on October 9, 2026.
+2. Reconcile internal settled positions against the sub-custodian's SWIFT MT564 REPE (Eligible Balance) statement.
+3. Isolate all pending trades (trades with trade date <= 2026-10-07 and settlement date > 2026-10-09) into the Pending Claims Suspense Queue.
+4. Segregation of tax pools: Group settled shares into 0%, 15%, and 20% withholding buckets based on validated tax documentation in the Client Tax Master database.
+
+5.3 Payment Posting and Cash Reconciliation (Pay Date: 2026-10-30)
+1. Upon receipt of SWIFT MT566 (Corporate Action Confirmation) and corresponding nostro cash credit on MT940/MT950, verify total net cash received matches expected aggregate net entitlement.
+2. Execute automated batch posting to client USD cash accounts under transaction code `DIV-CASH-EXT`.
+3. Generate and dispatch SWIFT MT566 confirmation advices to institutional clients within 2 hours of cash posting.
+
+6. OPERATIONAL RISKS, EXCEPTIONS, AND CONTROLS
+- Currency Mismatch Risk: Clients whose base ledger account is denominated in EUR or GBP without an active USD sub-account will trigger an FX auto-conversion exception. Operations must route those postings to the Treasury FX Desk at the 11:00 GMT fixing rate plus a 15 bps spread, unless standing instructions specify holding USD in suspense.
+- Late Market Claims: Counterparties failing to settle Cum-Date trades within 15 business days of Record Date must be escalated to the Settlements Buy-In Desk to prevent uncollectible dividend receivables.
+- Dividend Reinvestment Plan (DRIP) Exclusion: Note that Aetheris Energy Holdings PLC suspended its optional DRIP program in Q1 2026; any legacy standing instructions requesting stock reinvestment for GB00B9X4K218 must be suppressed and paid strictly in cash.
+- Four-Eyes Verification: Any manual adjustment to tax pool allocations or entitlement overrides exceeding USD 5,000.00 requires dual authorization by a Senior Corporate Actions Analyst and an Operations Vice President.
+================================================================================
+END OF DOCUMENT DOC-2026-CA-001
+================================================================================
